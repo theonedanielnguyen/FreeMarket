@@ -1,5 +1,23 @@
 .App {
   text-align: center;
+  /* background-image: url('https://gal.cdn.renderosity.com/images/image_2653712/80af2c62affb976c13ff38570284e5ab_large.jpg?v=1448060485');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; */
+}
+
+.App::before {
+  background-image: url('https://gal.cdn.renderosity.com/images/image_2653712/80af2c62affb976c13ff38570284e5ab_large.jpg?v=1448060485');
+  content: "";
+  position:absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: .15;
 }
 
 .App-logo {
