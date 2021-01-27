@@ -3,6 +3,10 @@ import { navigate } from '@reach/router';
 import { Button, Card, Icon, Image, Label } from 'semantic-ui-react';
 
 const ProductCard = (props) => {
+    const addToCart = (item) => {
+        navigate('/cart')
+    }
+
     return (
         <Card>
             <Image src='#' style={{height:'250px'}} href='/details'/>
@@ -17,7 +21,7 @@ const ProductCard = (props) => {
                     <Label basic pointing='right'>
                         $ Price
                     </Label>
-                    <Button icon onClick={()=>navigate('/cart')}>
+                    <Button icon onClick={()=>addToCart()}>
                         <Icon name='shopping cart' />
                         &nbsp;&nbsp;Add to Cart
                     </Button>

@@ -5,7 +5,7 @@ import ProductCard from './ProductCard';
 
 const ItemDisplay = () => {
     return(
-        <Container fluid style={{paddingTop:'6em', paddingRight: '20px', paddingLeft:'20px'}}>
+        <Container fluid style={{paddingTop:'1em', paddingRight: '20px', paddingLeft:'20px'}}>
             <Card.Group centered itemsPerRow='5'>
                 <ProductCard />
                 <ProductCard />

@@ -6,6 +6,7 @@ import Welcome from './views/Welcome.js';
 import Login from './views/Login';
 import Register from './views/Register';
 import Home from './views/Home';
+import NewItem from './views/NewItem';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Login path="/login" />
 
         <Home path="/home" />
+        <NewItem path="/newItem" />
       </Router>
     </div>
   );
