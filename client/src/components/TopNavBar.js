@@ -1,6 +1,6 @@
 import { navigate } from '@reach/router';
 import React from 'react';
-import { Button, Container, Form, Icon, Input, Menu } from 'semantic-ui-react';
+import { Button, Container, Dropdown, Form, Icon, Input, Menu } from 'semantic-ui-react';
 
 const TopNavBar = () => {
     const handleSearch = () => {
@@ -45,6 +45,14 @@ const TopNavBar = () => {
             <Menu borderless attached='bottom' inverted color='grey'>
                 <Menu.Menu position='right'>
                     <Menu.Item as='a' href='/home'>Home</Menu.Item>
+                    <Dropdown item floating text='Store Management'>
+                        <Dropdown.Menu>
+                            <Dropdown.Item content='View Storefront' onClick={()=>navigate('/store/:id')} />
+                            <Dropdown.Item content='Edit Storefront' onClick={()=>navigate('/editStorefront')} />
+                            <Dropdown.Item content='New Product' onClick={()=>navigate('/newProduct')} />
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Menu.Item as='a' href='/personalData'>Personal Data</Menu.Item>
                 </Menu.Menu>
             </Menu>
         </Container>

@@ -1,6 +1,5 @@
-import { navigate } from '@reach/router';
 import React from 'react';
-import { Button, Card, Container, Icon, Image, Label } from 'semantic-ui-react';
+import { Card, Container } from 'semantic-ui-react';
 import ProductCard from './ProductCard';
 
 const ItemDisplay = () => {

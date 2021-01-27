@@ -9,8 +9,13 @@ const ProductCard = (props) => {
 
     return (
         <Card>
-            <Image src='#' style={{height:'250px'}} href='/details'/>
-            <Card.Content as='a' onClick={()=>navigate('/details')}>
+            <Image src='#' style={{height:'250px'}}
+            // href='/details'
+            />
+            <Card.Content 
+                // as='a' 
+                // onClick={()=>navigate('/details')}
+                >
                 <Card.Header><h3>Product Name</h3></Card.Header>
                 <Card.Description>
                     This product is very nice and new and everyone would very much like to have it.
@@ -21,9 +26,15 @@ const ProductCard = (props) => {
                     <Label basic pointing='right'>
                         $ Price
                     </Label>
-                    <Button icon onClick={()=>addToCart()}>
-                        <Icon name='shopping cart' />
-                        &nbsp;&nbsp;Add to Cart
+                    <Button icon onClick={()=>addToCart()} animated='fade'>
+                        <Button.Content visible>
+                            <Icon name='shopping cart' />
+                            &nbsp;&nbsp;Add to Cart
+                        </Button.Content>
+                        <Button.Content hidden style={{color:'green'}}>
+                            <Icon name='shopping cart' />
+                            &nbsp;&nbsp;Add to Cart
+                        </Button.Content>
                     </Button>
                 </Button>
             </Card.Content>

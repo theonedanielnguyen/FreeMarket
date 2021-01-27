@@ -7,6 +7,8 @@ import Login from './views/Login';
 import Register from './views/Register';
 import Home from './views/Home';
 import NewItem from './views/NewItem';
+import StoreManagement from './views/StoreManagement';
+import Cart from './views/Cart';
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
         <Login path="/login" />
 
         <Home path="/home" />
-        <NewItem path="/newItem" />
+        <Cart path="/cart" />
+        <StoreManagement path="/storeManagement" />
+        <NewItem path="/newProduct" />
       </Router>
     </div>
   );

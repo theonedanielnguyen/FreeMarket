@@ -1,3 +1,4 @@
+import { navigate } from '@reach/router';
 import React, { useState } from 'react';
 import { Button, Card, Container, Form, Grid, Header, Icon, Image, Label, Segment } from 'semantic-ui-react';
 import TopNavBar from '../components/TopNavBar';
@@ -77,12 +78,21 @@ const NewItem = () => {
                                 value={description}
                                 onChange={(e)=>setDescription(e.target.value)}
                                 />
-                            <Button
-                                type='submit'
-                                size='large'
-                                content='Create Product'
-                                color='green'
-                                />
+                            <Button.Group>
+                                <Button
+                                    type='submit'
+                                    size='large'
+                                    content='Create Product'
+                                    color='green'
+                                    />
+                                <Button.Or />
+                                <Button
+                                    size='large'
+                                    content='Cancel'
+                                    color='red'
+                                    onClick={()=>navigate('/storemanagement')}
+                                    />
+                            </Button.Group>
                         </Segment>
                     </Form>
                 </Grid.Column>
