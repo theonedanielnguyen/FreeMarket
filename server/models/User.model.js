@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
     firstName: {
@@ -54,7 +55,7 @@ const UserSchema = new mongoose.Schema({
     cart: {
         type: [String],
     },
-});
+}, { timestamps : true});
 
 UserSchema.virtual('confirmPassword')
     .get(() => this._confirmPassword)
@@ -65,6 +66,14 @@ UserSchema.pre('validate', function(next) {
         this.invalidate('confirmPassword', 'Password must match confirm password');
     }
     next();
-}, { timestamps : true});
+});
+
+UserSchema.pre('save', function(next) {
+    bcrypt.hash(this.password, 10)
+        .then(hash => {
+            this.password = hash;
+            next();
+        })
+})
 
 module.exports.User = mongoose.model("User", UserSchema);
