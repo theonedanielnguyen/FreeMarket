@@ -9,7 +9,9 @@ const ProductCard = (props) => {
 
     return (
         <Card>
-            <Image src='#' style={{height:'250px'}}
+            <Image src='https://images-na.ssl-images-amazon.com/images/I/71zNWbTHzxL._SL1500_.jpg' 
+            size='large'
+            // style={{height:'500px'}}
             // href='/details'
             />
             <Card.Content 

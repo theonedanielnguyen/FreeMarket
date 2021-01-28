@@ -9,6 +9,7 @@ import Home from './views/Home';
 import NewItem from './views/NewItem';
 import StoreManagement from './views/StoreManagement';
 import Cart from './views/Cart';
+import Search from './views/Search';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Cart path="/cart" />
         <StoreManagement path="/storeManagement" />
         <NewItem path="/newProduct" />
+        <Search path='/search' />
       </Router>
     </div>
   );

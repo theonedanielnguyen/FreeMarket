@@ -10,7 +10,7 @@ const TopNavBar = () => {
     return (
         <Container fluid>
             <Menu inverted color='green' borderless attached='top'>
-                <Menu.Item as='a' header>
+                <Menu.Item as='a' header onClick={()=>navigate('/home')}>
                     <h1>FreeMarket</h1>
                 </Menu.Item>
                 <Menu.Item>
@@ -49,6 +49,7 @@ const TopNavBar = () => {
                         <Dropdown.Menu>
                             <Dropdown.Item content='View Storefront' onClick={()=>navigate('/store/:id')} />
                             <Dropdown.Item content='Edit Storefront' onClick={()=>navigate('/editStorefront')} />
+                            <Dropdown.Item content='View Items' onClick={()=>navigate('/storeManagement')} />
                             <Dropdown.Item content='New Product' onClick={()=>navigate('/newProduct')} />
                         </Dropdown.Menu>
                     </Dropdown>
