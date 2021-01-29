@@ -4,9 +4,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+const initialState = {
+  user: null,
+  shop: null,
+  shoppingCart: [],
+};
+
+function reducer(state, action) {
+  // TODO
+}
+
+//Global app store
+const store = createStore(reducer, initialState);
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* Connecting the store to the app */}
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

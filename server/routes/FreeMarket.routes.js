@@ -16,7 +16,7 @@ module.exports = function(app) {
     app.get('/api/shop/:id', ShopController.getOneShop);
     app.put('/api/shop/:id', ShopController.updateShop);
 
-    app.post('/api/user/new', UserController.createUser);
-    app.get('/api/user/:id', UserController.getOneUser);
-    app.put('/api/user/:id', UserController.updateUser);
+    app.post('/api/users/new', UserController.createUser);
+    app.get('/api/users/:id', UserController.getOneUser);
+    app.put('/api/users/:id', UserController.updateUser);
 }

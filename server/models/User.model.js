@@ -5,12 +5,10 @@ const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "Please enter a first name"],
-        minLength: [5, "Your first name must be at least 5 characters long"]
     },
     lastName: {
         type: String,
         required: [true, "Please enter a last name"],
-        minLength: [5, "Your last name must be at least 5 characters long"]
     },
     email: {
         type: String,
@@ -42,7 +40,7 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Payment"
     },
-    shopID: {
+    shop_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Shop",
     },
