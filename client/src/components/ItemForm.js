@@ -87,7 +87,6 @@ const ItemForm = (props) => {
                             onChange={(e)=>setPrice(e.target.value)}
                             />
                         <Form.TextArea
-                            fluid
                             name='description'
                             placeholder='Tell us about your product'
                             value={description}

@@ -42,7 +42,12 @@ const Welcome = () => {
                     fontSize: '4vw'
                 }}
             />
-            <Button animated size='huge' color='green' style={{marginTop: '1em'}} onClick={()=>navigate('register')}>
+            <Button 
+                animated 
+                size='huge' 
+                color='green' 
+                style={{marginTop: '1em'}} 
+                onClick={()=>navigate('/register')} >
                 <Button.Content visible>Get Started <Icon name='arrow right'/></Button.Content>
                 <Button.Content hidden>Register</Button.Content>
             </Button>
