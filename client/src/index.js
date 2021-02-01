@@ -8,13 +8,55 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 const initialState = {
-  user: null,
-  shop: null,
-  shoppingCart: [],
+  loggedInUser: null,
+  userPayment: null,
+  userShop: null,
+  shoppingCart: {
+    total: 0,
+    items: [],
+  }
 };
 
-function reducer(state, action) {
-  // TODO
+/* Calculates new app state. We wont modify existing state directly */
+function reducer(state = initialState, action) {
+  switch(action.type) {
+    /*case 'TOGGLE DARK MODE':
+        return {
+          ...state,
+          darkMode: !state.darkMode,
+        }
+    */
+    case 'REGISTER':
+      return {
+        ...state,
+        loggedInUser: action.payload.targetUser,
+        userShop: action.payload.targetShop,
+      }
+
+    case 'LOGIN':
+      return {
+        state,
+        loggedInUser: action.payload.user,
+        userShop: action.payload.shop,
+        //Payment
+        //Cart
+      }
+
+    case 'NEWITEM':
+      return {
+        state,
+        loggedInUser: action.payload.newUser,
+        userShop: action.payload.newShop,
+      }
+
+    case 'LOGOUT':
+      return {
+        ...initialState
+      }
+
+    default:
+      return state;
+  }
 }
 
 //Global app store

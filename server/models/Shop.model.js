@@ -7,9 +7,11 @@ const ShopSchema = new mongoose.Schema({
     },
     imageURL: { 
         type: String,
+        default: ""
     },
     description: { 
         type: String,
+        default: ""
     },
     itemsSold: [
         {

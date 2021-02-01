@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Container, Form, Grid, Header, Icon, Message, Segment } from 'semantic-ui-react';
-import { navigate } from '@reach/router'
+import { navigate } from '@reach/router';
+import { useDispatch } from 'react-redux';
 
 const Register = () => {
+    // const user = useSelector(state => state.loggedInUser);
+    const dispatch = useDispatch();
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -25,18 +29,19 @@ const Register = () => {
             const newUserResponse = await axios.post('http://localhost:8000/api/users/new', newUser);
             const newUserId = newUserResponse.data._id;
             const userData = await axios.get('http://localhost:8000/api/users/'+newUserId);
-            const user = userData.data[0];
+            const targetUser = userData.data[0];
             const newShop = {shopOwner: newUserId};
             const newShopResponse = await axios.post('http://localhost:8000/api/shop/new', newShop);
             const newShopId = newShopResponse.data._id;
             const shopData = await axios.get('http://localhost:8000/api/shop/'+newShopId)
-            const shop = shopData.data[0];
-            shop["owner_id"] = newUserId;
-            const updateShopResponse = await axios.put('http://localhost:8000/api/shop/'+newShopId, shop);
-            user["shop_id"] = updateShopResponse.data._id;
-            const updateUserResponse = await axios.put('http://localhost:8000/api/users/'+newUserId, user);
-            console.log(updateUserResponse.data);
-            
+            const targetShop = shopData.data[0];
+            targetShop["owner_id"] = newUserId;
+            const updateShopResponse = await axios.put('http://localhost:8000/api/shop/'+newShopId, targetShop);
+            targetUser["shop_id"] = updateShopResponse.data._id;
+            const updateUserResponse = await axios.put('http://localhost:8000/api/users/'+newUserId, targetUser);
+            console.log(updateUserResponse);
+            dispatch({type: 'REGISTER', payload: {targetUser, targetShop}});
+            navigate('/home');
         }
         catch(error){
             console.log(error);

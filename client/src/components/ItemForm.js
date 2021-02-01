@@ -1,12 +1,30 @@
 import React, { useState } from 'react';
 import { navigate } from '@reach/router'
 import { Button, Card, Form, Grid, Header, Icon, Image, Label, Segment } from 'semantic-ui-react';
+import { useSelector } from 'react-redux';
 
-const ItemForm = () => {
-    const [productName, setProductName] = useState("");
-    const [imageURL, setImageURL] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
+const ItemForm = (props) => {
+    const { initialName, initialImageURL, initialPrice, initialDescription, onSubmit } = props
+    const user = useSelector(state=>state.loggedInUser);
+    const shop = useSelector(state=>state.userShop)
+
+    const [name, setName] = useState(initialName);
+    const [imageURL, setImageURL] = useState(initialImageURL);
+    const [price, setPrice] = useState(initialPrice);
+    const [description, setDescription] = useState(initialDescription);
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        const newItem = {
+            creator_id: user._id,
+            shop_id: shop._id,
+            name: name,
+            imageURL: imageURL,
+            price: price,
+            description: description
+        }
+        onSubmit(newItem);
+    }
 
     return (
         <Grid columns={2} verticalAlign='middle' style={{paddingTop: '3em', paddingRight:'5vw'}}>
@@ -15,7 +33,7 @@ const ItemForm = () => {
                     <Card>
                         <Image src={imageURL} style={{height:'250px'}}/>
                         <Card.Content>
-                            <Card.Header><h3>{productName}</h3></Card.Header>
+                            <Card.Header><h3>{name}</h3></Card.Header>
                             <Card.Description>
                                 {description}
                             </Card.Description>
@@ -39,15 +57,15 @@ const ItemForm = () => {
                     style={{fontSize: '2em'}}
                     content='Create Product'
                     />
-                <Form>
+                <Form onSubmit={onSubmitHandler}>
                     <Segment raised>
                         <Form.Input
                             fluid
                             name='productName'
                             placeholder='Product Name'
                             type='text'
-                            value={productName}
-                            onChange={(e)=>setProductName(e.target.value)}
+                            value={name}
+                            onChange={(e)=>setName(e.target.value)}
                             />
                         <Form.Input
                             fluid

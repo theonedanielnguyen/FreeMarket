@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
-    creator: {
+    creator_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    shop: {
+    shop_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Shop',
     },

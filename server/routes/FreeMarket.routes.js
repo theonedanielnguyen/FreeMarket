@@ -19,4 +19,5 @@ module.exports = function(app) {
     app.post('/api/users/new', UserController.createUser);
     app.get('/api/users/:id', UserController.getOneUser);
     app.put('/api/users/:id', UserController.updateUser);
+    app.post('/api/users/login', UserController.loginUser);
 }

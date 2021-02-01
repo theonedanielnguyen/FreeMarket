@@ -1,8 +1,13 @@
 import { navigate } from '@reach/router';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Container, Dropdown, Form, Icon, Input, Menu } from 'semantic-ui-react';
 
 const TopNavBar = () => {
+    const user = useSelector(state => state.loggedInUser);
+    const loggedInUser = {...user}
+    const dispatch = useDispatch();
+
     const handleSearch = () => {
         navigate('/search')
     }
@@ -26,7 +31,7 @@ const TopNavBar = () => {
                 </Menu.Item>
                 <Menu.Menu position='right'>
                     <Menu.Item>
-                        Hello, "user.name" 
+                        Hello, {loggedInUser.firstName}! 
                     </Menu.Item>
                     <Menu.Item>
                         <Button onClick={()=>navigate('/cart')}>
@@ -35,7 +40,12 @@ const TopNavBar = () => {
                         </Button>
                     </Menu.Item>
                     <Menu.Item>
-                        <Button onClick={()=>navigate('/')} animated>
+                        <Button 
+                            onClick={()=>{
+                                dispatch({type:'LOGOUT', payload:null});
+                                navigate('/');
+                                }} 
+                            animated>
                             <Button.Content visible>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Log Out &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button.Content>
                             <Button.Content hidden>Come back soon!</Button.Content>
                         </Button>
@@ -44,8 +54,8 @@ const TopNavBar = () => {
             </Menu>
             <Menu borderless attached='bottom' inverted color='grey'>
                 <Menu.Menu position='right'>
-                    <Menu.Item as='a' href='/home'>Home</Menu.Item>
-                    <Dropdown item floating text='Store Management'>
+                    <Menu.Item as='a' onClick={()=>navigate('/home')}>Home</Menu.Item>
+                    <Dropdown simple item text='Store Management'>
                         <Dropdown.Menu>
                             <Dropdown.Item content='View Storefront' onClick={()=>navigate('/store/:id')} />
                             <Dropdown.Item content='Edit Storefront' onClick={()=>navigate('/editStorefront')} />

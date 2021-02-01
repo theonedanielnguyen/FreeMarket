@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Grid, Header, Icon, Message, Segment } from 'semantic-ui-react';
+import axios from 'axios';
 import { navigate } from '@reach/router'
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
-    const loginHandler = (e) => {
-        navigate('/home')
+    const dispatch = useDispatch();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const loginHandler = async (e) => {
+        e.preventDefault();
+        const userLogin = {
+            email,
+            password,
+        }
+
+        try {
+            const validLogin = await axios.post('http://localhost:8000/api/users/login', userLogin);
+            const user = validLogin.data;
+            const targetShop = await axios.get('http://localhost:8000/api/shop/'+user.shop_id);
+            const shop = targetShop.data[0];
+            //Add in the payment and card options
+            console.log(user)
+            dispatch({ type: 'LOGIN', payload: {user, shop}});
+            navigate('/home')
+        }
+        catch(error) {
+            console.log(error);
+        }
     }
     return (
         <Grid verticalAlign='middle' textAlign='center' style={{height:'100vh'}} >
@@ -21,6 +46,8 @@ const Login = () => {
                             iconPosition='left'
                             placeholder='E-Mail'
                             type='email'
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
                             />
                         <Form.Input
                             fluid
@@ -29,6 +56,8 @@ const Login = () => {
                             iconPosition='left'
                             placeholder='Password'
                             type='password'
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
                             />
                         <Button
                             type='submit'
