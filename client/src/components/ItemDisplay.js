@@ -2,10 +2,19 @@ import React from 'react';
 import { Card, Container } from 'semantic-ui-react';
 import ProductCard from './ProductCard';
 
-const ItemDisplay = () => {
+const ItemDisplay = (props) => {
+    const displayItems = props.items;
+    console.log(displayItems);
+
     return(
         <Container fluid style={{paddingTop:'1em', paddingRight: '20px', paddingLeft:'20px'}}>
             <Card.Group centered itemsPerRow='5'>
+                {displayItems.map((item, key) => {
+                    return(
+                        <ProductCard key={key} productID={item} />
+                    )
+                })}
+                {/* <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
@@ -14,8 +23,7 @@ const ItemDisplay = () => {
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                <ProductCard /> */}
             </Card.Group>
         </Container>
     )

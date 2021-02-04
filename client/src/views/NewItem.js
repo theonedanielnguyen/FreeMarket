@@ -5,6 +5,7 @@ import { Container } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import ItemForm from '../components/ItemForm';
 import TopNavBar from '../components/TopNavBar';
+import { navigate } from '@reach/router';
 
 const NewItem = () => {
     const user = useSelector(state=> state.loggedInUser);
@@ -17,11 +18,12 @@ const NewItem = () => {
             let targetItem = newItem.data;
             user.createdItems.push(targetItem._id);
             shop.itemsSold.push(targetItem._id);
-            const updatedUser = await axios.put('http://    localhost:8000/api/users/'+user._id, user)
-            const updatedShop = await axios.put('http://    localhost:8000/api/shop'+shop._id)
+            const updatedUser = await axios.put('http://localhost:8000/api/users/'+user._id, user)
+            const updatedShop = await axios.put('http://localhost:8000/api/shop/'+shop._id, shop)
             const newUser = updatedUser.data;
             const newShop = updatedShop.data;
             dispatch({ type: 'NEWITEM', payload: {newUser, newShop}});
+            navigate('/storeManagement')
         }
         catch(error) {
             console.log(error);
