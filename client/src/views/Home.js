@@ -1,16 +1,48 @@
 // import { navigate } from '@reach/router';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Container, Header } from 'semantic-ui-react';
 import ItemDisplay from '../components/ItemDisplay';
 import TopNavBar from '../components/TopNavBar';
 
 const Home = () => {
-    const fakeItems = ["601b8f6fecf5634c1c98f9a8"]
+    const [ items, setItems ] = useState([]);
+    const [ loaded, setLoaded ] = useState(false);
+
+    const getItems = async () => {
+        const idSet = [];
+        let pulledItems = [];
+        try {
+            const count = await axios.get('http://localhost:8000/api/item/count');
+            if (parseInt(count)<=10) {
+                pulledItems = await axios.get('http://localhost:8000/api/item/all')
+                pulledItems.data.forEach(item => idSet.push(item._id));
+            }
+            else {
+                while (idSet.length < 10) {
+                    pulledItems = await axios.get('http://localhost:8000/api/item/random/'+(10-idSet.length))
+                    pulledItems.data.forEach(item => idSet.push(item._id))
+                }
+                console.log(idSet)
+            }
+            setItems(idSet);
+            setLoaded(true);
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+    }
+
+    useEffect(() => {
+        getItems();
+    }, [])
+
     return (
         <Container fluid>
             <TopNavBar />
             <Header size='large'>Some Offered Items</Header>
-            <ItemDisplay items={fakeItems}/>
+            {loaded && <ItemDisplay items={items}/> }
         </Container>
     )
 }

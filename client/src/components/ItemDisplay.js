@@ -4,7 +4,6 @@ import ProductCard from './ProductCard';
 
 const ItemDisplay = (props) => {
     const displayItems = props.items;
-    console.log(displayItems);
 
     return(
         <Container fluid style={{paddingTop:'1em', paddingRight: '20px', paddingLeft:'20px'}}>
@@ -14,16 +13,6 @@ const ItemDisplay = (props) => {
                         <ProductCard key={key} productID={item} />
                     )
                 })}
-                {/* <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard /> */}
             </Card.Group>
         </Container>
     )
