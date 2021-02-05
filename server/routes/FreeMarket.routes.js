@@ -5,8 +5,11 @@ const UserController = require('../controllers/User.controller');
 
 module.exports = function(app) {
     app.post('/api/item/new', ItemController.createItem);
+    app.get('/api/item/all', ItemController.getAllItems);
+    app.get('/api/item/count', ItemController.getItemCount);
+    app.get('/api/item/random/:num', ItemController.random);
     app.get('/api/item/:id', ItemController.getOneItem);
-    app.put('/api/item/:id', ItemController.updateItem);
+    app.put('/api/item/:id', ItemController.updateItem);    
 
     app.post('/api/payment/new', PaymentController.createPayment);
     app.get('/api/payment/:id', PaymentController.getOnePayment);

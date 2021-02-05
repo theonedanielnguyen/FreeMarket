@@ -17,3 +17,21 @@ module.exports.updateItem = (req, res) => {
         .then(item => res.json(item))
         .catch(err => res.json(err))
 }
+
+module.exports.getAllItems = (req, res) => {
+    Item.find()
+        .then(items => res.json(items))
+        .catch(err => res.json(err))
+}
+
+module.exports.getItemCount = (req, res) => {
+    Item.count()
+        .then(count => res.json(count))
+        .catch(err => res.json(err))
+}
+
+module.exports.random = (req, res) => {
+    Item.aggregate([{$sample: {size:parseInt(req.params.num)}}])
+        .then(selection => res.json(selection))
+        .catch(err => res.json(err))
+}
