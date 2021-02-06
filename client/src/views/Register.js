@@ -27,20 +27,18 @@ const Register = () => {
 
         try {
             const newUserResponse = await axios.post('http://localhost:8000/api/users/new', newUser);
-            const newUserId = newUserResponse.data._id;
-            const userData = await axios.get('http://localhost:8000/api/users/'+newUserId);
-            const targetUser = userData.data[0];
-            const newShop = {shopOwner: newUserId};
+            const targetUser = newUserResponse.data;
+            const newShop = {shopOwner: targetUser._id};
             const newShopResponse = await axios.post('http://localhost:8000/api/shop/new', newShop);
-            const newShopId = newShopResponse.data._id;
-            const shopData = await axios.get('http://localhost:8000/api/shop/'+newShopId)
-            const targetShop = shopData.data[0];
-            targetShop["owner_id"] = newUserId;
-            const updateShopResponse = await axios.put('http://localhost:8000/api/shop/'+newShopId, targetShop);
-            targetUser["shop_id"] = updateShopResponse.data._id;
-            const updateUserResponse = await axios.put('http://localhost:8000/api/users/'+newUserId, targetUser);
+            const targetShop = newShopResponse.data;
+            const newPayment = {cardOwner: targetUser._id};
+            const newPaymentResponse = await axios.post('http://localhost:8000/api/payment/new', newPayment);
+            const targetPayment = newPaymentResponse.data;
+            targetUser["shop_id"] = targetShop._id;
+            targetUser["payment_id"] = targetPayment._id;
+            const updateUserResponse = await axios.put('http://localhost:8000/api/users/'+targetUser._id, targetUser);
             console.log(updateUserResponse);
-            dispatch({type: 'REGISTER', payload: {targetUser, targetShop}});
+            dispatch({type: 'REGISTER', payload: {targetUser, targetShop, targetPayment}});
             navigate('/home');
         }
         catch(error){

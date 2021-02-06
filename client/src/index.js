@@ -31,6 +31,7 @@ function reducer(state = initialState, action) {
         ...state,
         loggedInUser: action.payload.targetUser,
         userShop: action.payload.targetShop,
+        userPayment: action.payload.targetPayment,
       }
 
     case 'LOGIN':

@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
     zipCode: {
         type: Number,
     },
-    paymentID: {
+    payment_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Payment"
     },
