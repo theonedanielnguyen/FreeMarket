@@ -34,6 +34,7 @@ const Register = () => {
             const newPayment = {cardOwner: targetUser._id};
             const newPaymentResponse = await axios.post('http://localhost:8000/api/payment/new', newPayment);
             const targetPayment = newPaymentResponse.data;
+            console.log(targetPayment);
             targetUser["shop_id"] = targetShop._id;
             targetUser["payment_id"] = targetPayment._id;
             const updateUserResponse = await axios.put('http://localhost:8000/api/users/'+targetUser._id, targetUser);

@@ -7,12 +7,12 @@ const ProductCard = (props) => {
     const productID = props.productID;
     const [ product, setProduct ] = useState({});
     
-    const fakeItem = {
-        name: "Product Name",
-        imageURL: "https://images-na.ssl-images-amazon.com/images/I/71zNWbTHzxL._SL1500_.jpg",
-        price: 25,
-        description: "A nice set of glassware",
-    }
+    // const fakeItem = {
+    //     name: "Product Name",
+    //     imageURL: "https://images-na.ssl-images-amazon.com/images/I/71zNWbTHzxL._SL1500_.jpg",
+    //     price: 25,
+    //     description: "A nice set of glassware",
+    // }
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/item/" + productID)
