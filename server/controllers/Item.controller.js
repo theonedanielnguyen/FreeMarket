@@ -25,7 +25,7 @@ module.exports.getAllItems = (req, res) => {
 }
 
 module.exports.getItemCount = (req, res) => {
-    Item.count()
+    Item.countDocuments()
         .then(count => res.json(count))
         .catch(err => res.json(err))
 }

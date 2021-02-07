@@ -23,7 +23,8 @@ const Home = () => {
                     pulledItems = await axios.get('http://localhost:8000/api/item/random/'+(10-idSet.length))
                     //Need to edit here to ensure only UNIQUE items are returned.
                     //If else statement using Array.includes()
-                    pulledItems.data.forEach(item => idSet.push(item._id))
+                    //POTENTIAL ISSUE TO BE FIXED ONCE ENOUGH ITEMS ARE ENTERED FOR THIS TO TRIGGER!!!
+                    pulledItems.data.forEach(item => !idSet.includes(item._id)?idSet.push(item._id): "")
                 }
             }
             setItems(idSet);

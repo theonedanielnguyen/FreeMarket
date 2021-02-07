@@ -63,7 +63,7 @@ const TopNavBar = () => {
                             <Dropdown.Item content='New Product' onClick={()=>navigate('/newProduct')} />
                         </Dropdown.Menu>
                     </Dropdown>
-                    <Menu.Item as='a' href='/personalData'>Personal Data</Menu.Item>
+                    <Menu.Item as='a' onClick={()=>navigate('/personalData')}>Personal Data</Menu.Item>
                 </Menu.Menu>
             </Menu>
         </Container>

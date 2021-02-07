@@ -10,6 +10,7 @@ import NewItem from './views/NewItem';
 import StoreManagement from './views/StoreManagement';
 import Cart from './views/Cart';
 import Search from './views/Search';
+import PersonalData from './views/PersonalData';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Cart path="/cart" />
         <StoreManagement path="/storeManagement" />
         <NewItem path="/newProduct" />
+        <PersonalData path="/personalData" />
         <Search path='/search' />
       </Router>
     </div>
