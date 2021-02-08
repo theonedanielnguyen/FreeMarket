@@ -22,9 +22,10 @@ const Login = () => {
             const user = validLogin.data;
             const targetShop = await axios.get('http://localhost:8000/api/shop/'+user.shop_id);
             const shop = targetShop.data[0];
-            //Add in the payment and card options
+            const targetPayment = await axios.get('http://localhost:8000/api/payment/'+user.payment_id);
+            const payment = targetPayment.data[0];
             console.log(user)
-            dispatch({ type: 'LOGIN', payload: {user, shop}});
+            dispatch({ type: 'LOGIN', payload: {user, shop, payment}});
             navigate('/home')
         }
         catch(error) {

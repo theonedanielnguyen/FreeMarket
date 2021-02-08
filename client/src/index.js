@@ -39,7 +39,7 @@ function reducer(state = initialState, action) {
         state,
         loggedInUser: action.payload.user,
         userShop: action.payload.shop,
-        //Payment
+        userPayment: action.payload.payment,
         //Cart
       }
 
