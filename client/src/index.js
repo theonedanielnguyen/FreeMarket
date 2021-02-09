@@ -54,6 +54,18 @@ function reducer(state = initialState, action) {
       return {
         ...initialState
       }
+    
+    case 'UPDATE_ADDRESS':
+      return {
+        state,
+        loggedInUser: action.payload.updatedUser,
+      }
+
+    case 'UPDATE_PAYMENT':
+      return {
+        state,
+        userPayment: action.payload.updatedPayment,
+      }
 
     default:
       return state;

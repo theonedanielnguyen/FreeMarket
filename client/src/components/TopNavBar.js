@@ -5,7 +5,6 @@ import { Button, Container, Dropdown, Form, Icon, Input, Menu } from 'semantic-u
 
 const TopNavBar = () => {
     const user = useSelector(state => state.loggedInUser);
-    const loggedInUser = {...user}
     const dispatch = useDispatch();
 
     const handleSearch = () => {
@@ -31,7 +30,7 @@ const TopNavBar = () => {
                 </Menu.Item>
                 <Menu.Menu position='right'>
                     <Menu.Item>
-                        Hello, {loggedInUser.firstName}! 
+                        Hello, {user.firstName}! 
                     </Menu.Item>
                     <Menu.Item>
                         <Button onClick={()=>navigate('/cart')}>
