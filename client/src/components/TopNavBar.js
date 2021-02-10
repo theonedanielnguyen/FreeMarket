@@ -1,11 +1,10 @@
 import { navigate } from '@reach/router';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Button, Container, Dropdown, Form, Icon, Input, Menu } from 'semantic-ui-react';
 
 const TopNavBar = () => {
     const user = useSelector(state => state.loggedInUser);
-    const dispatch = useDispatch();
 
     const handleSearch = () => {
         navigate('/search')
@@ -41,7 +40,6 @@ const TopNavBar = () => {
                     <Menu.Item>
                         <Button 
                             onClick={()=>{
-                                dispatch({type:'LOGOUT', payload:null});
                                 navigate('/');
                                 }} 
                             animated>

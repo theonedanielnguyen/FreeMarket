@@ -63,7 +63,7 @@ function reducer(state = initialState, action) {
 
     case 'UPDATE_PAYMENT':
       return {
-        state,
+        ...state,
         userPayment: action.payload.updatedPayment,
       }
 

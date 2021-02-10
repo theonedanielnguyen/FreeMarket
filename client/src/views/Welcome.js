@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Header, Button, Icon, Item} from 'semantic-ui-react';
 import { navigate } from '@reach/router';
+import { useDispatch } from 'react-redux';
 
 const Welcome = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({type:'LOGOUT', payload:null});
+    }, [dispatch])
+
     return(
         <Container fluid >
             <Item 

@@ -23,7 +23,7 @@ const Cart = () => {
                                 </Item.Description>
                             </Item.Content>
                             <Item.Extra>
-                                <Button floated='right' color='primary' style={{marginTop: '1em'}}>
+                                <Button floated='right' color='twitter' style={{marginTop: '1em'}}>
                                     Checkout
                                 </Button>
                             </Item.Extra>

@@ -21,7 +21,7 @@ const ProductCard = (props) => {
                 // setProduct(fakeItem);
             })
             .catch(err => console.log(err));
-    })
+    }, [productID]);
 
     const addToCart = (item) => {
         navigate('/cart')

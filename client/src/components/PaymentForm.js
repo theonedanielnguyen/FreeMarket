@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Header, Icon, Segment } from 'semantic-ui-react';
 
@@ -8,7 +9,7 @@ const PaymentForm = () => {
     const dispatch = useDispatch();
 
     const [ cardNumber, setCardNumber ] = useState(payment.cardNumber);
-    const [ expirationDate, setExpirationDate ] = useState(payment.expirationDate);
+    const [ expirationDate, setExpirationDate ] = useState(moment(payment.expirationDate).format('yyyy-MM'));
     const [ securityCode, setSecurityCode ] = useState(payment.securityCode);
     const [ editable, setEditable ] = useState(false);
 
@@ -25,7 +26,6 @@ const PaymentForm = () => {
         try {
             const updatedPayment = await axios.put('http://localhost:8000/api/payment/'+payment._id, newPayment);
             dispatch({ type: 'UPDATE_PAYMENT', payload: {updatedPayment:updatedPayment.data}})
-            console.log(updatedPayment.data);
         }
         catch (error) {
             console.log(error);
