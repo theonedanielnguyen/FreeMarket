@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema({
         }
     ],
     cart: {
-        total: {type: Number},
+        total: {type: Number, default: 0},
         items: [{type: [String]}],
     },
 }, { timestamps : true});
