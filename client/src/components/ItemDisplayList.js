@@ -4,19 +4,22 @@ import { useSelector } from 'react-redux';
 import ProductCardHorizontal from '../components/ProductCardHorizontal';
 
 const ItemDisplayList = () => {
-    // const shoppingCart = useSelector(state => state.shoppingCart);
-    const shoppingCart = {
-        total: 0,
-        items: ["601e40173bdad75004e5547a","601e3f5eeea16b0a5cb1fa07","601e3f2aeea16b0a5cb1fa06"],
-    }
+    const shoppingCart = useSelector(state => state.shoppingCart);
+    // const shoppingCart = {
+    //     total: 0,
+    //     items: ["601e40173bdad75004e5547a","601e3f5eeea16b0a5cb1fa07","601e3f2aeea16b0a5cb1fa06"],
+    // }
 
     return (
         <Container fluid style={{paddingTop:'1em', paddingRight: '20px', paddingLeft:'20px'}}>
             <Grid centered style={{marginTop:'1em'}}>
                 <Grid.Row>
                     <Item.Group divided style={{width:'60vw'}}>
-                        <ProductCardHorizontal />
-                        <ProductCardHorizontal />
+                        {shoppingCart.items.map((item, index) => {
+                            return (
+                                <ProductCardHorizontal productID={item} key={index} /> 
+                            )
+                        })}
                     </Item.Group>
                 </Grid.Row>
                 <Grid.Row style={{textAlign:'right'}}>

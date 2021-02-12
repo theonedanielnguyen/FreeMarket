@@ -40,7 +40,10 @@ function reducer(state = initialState, action) {
         loggedInUser: action.payload.user,
         userShop: action.payload.shop,
         userPayment: action.payload.payment,
-        //Cart
+        shoppingCart: {
+          total: action.payload.userCart.total,
+          items: action.payload.userCart.items,
+        },
       }
 
     case 'NEWITEM':

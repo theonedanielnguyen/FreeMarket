@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { navigate } from '@reach/router';
+import { useSelector } from 'react-redux'
 import { Button, Card, Icon, Image, Label } from 'semantic-ui-react';
 
 const ProductCard = (props) => {
+    const user = useSelector(state => state.loggedInUser);
     const productID = props.productID;
     const [ product, setProduct ] = useState({});
     
@@ -23,7 +25,7 @@ const ProductCard = (props) => {
             .catch(err => console.log(err));
     }, [productID]);
 
-    const addToCart = (item) => {
+    const addToCart = () => {
         navigate('/cart')
     }
 
