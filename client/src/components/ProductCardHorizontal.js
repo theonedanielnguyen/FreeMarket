@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Grid, Item } from 'semantic-ui-react';
 
 const ProductCardHorizontal = (props) => {
     const productID = props.productID;
+    const shoppingCart = useSelector(state => state.shoppingCart);
+    const dispatch = useDispatch();
     const [ product, setProduct ] = useState({})
 
     // const fakeItem = {
@@ -12,6 +15,13 @@ const ProductCardHorizontal = (props) => {
     //     price: 25.00,
     //     description: "A nice buncha flow'rs",
     // }
+
+    const removeItem = () => {
+        const newTotal = shoppingCart.total - product.price;
+        const newItems = shoppingCart.items.filter(item => item !== productID);
+        // console.log(newItems)
+        dispatch({ type: 'REMOVE_FROM_CART', payload: {newTotal, newItems}})
+    }
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/item/" + productID)
@@ -37,7 +47,7 @@ const ProductCardHorizontal = (props) => {
                 </Item.Content>
                 <Item.Description style={{textAlign:'left'}}>{product.description}</Item.Description>
                 <Item.Extra>
-                    <Button floated='right' color='red'>
+                    <Button floated='right' color='red' onClick={() =>removeItem()}>
                         Remove
                     </Button>
                 </Item.Extra>

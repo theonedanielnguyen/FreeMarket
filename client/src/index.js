@@ -53,6 +53,24 @@ function reducer(state = initialState, action) {
         userShop: action.payload.newShop,
       }
 
+    case 'ADD_ITEM_TO_CART':
+      return {
+        ...state,
+        shoppingCart: {
+          total: action.payload.newTotal,
+          items: action.payload.newItems,
+        }
+      }
+    
+    case 'REMOVE_FROM_CART':
+      return {
+        ...state,
+        shoppingCart: {
+          total: action.payload.newTotal,
+          items: action.payload.newItems,
+        }
+      }
+
     case 'LOGOUT':
       return {
         ...initialState

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { navigate } from '@reach/router';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Icon, Image, Label } from 'semantic-ui-react';
 
 const ProductCard = (props) => {
-    const user = useSelector(state => state.loggedInUser);
     const productID = props.productID;
+    const shoppingCart = useSelector(state => state.shoppingCart);
+    const dispatch = useDispatch();
     const [ product, setProduct ] = useState({});
     
     // const fakeItem = {
@@ -26,6 +27,10 @@ const ProductCard = (props) => {
     }, [productID]);
 
     const addToCart = () => {
+        const newTotal = shoppingCart.total + product.price;
+        const newItems = [...shoppingCart.items, productID];
+        // console.log(newItems)
+        dispatch({type: 'ADD_ITEM_TO_CART', payload: {newItems, newTotal}});
         navigate('/cart')
     }
 

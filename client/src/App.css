@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  max-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
   /* background-image: url('https://gal.cdn.renderosity.com/images/image_2653712/80af2c62affb976c13ff38570284e5ab_large.jpg?v=1448060485');
   background-size: cover;
   background-repeat: no-repeat;
