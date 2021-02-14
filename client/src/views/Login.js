@@ -21,12 +21,12 @@ const Login = () => {
             const validLogin = await axios.post('http://localhost:8000/api/users/login', userLogin);
             const user = validLogin.data;
             const userCart = user.cart;
-            console.log(userCart);
+            // console.log(userCart);
             const targetShop = await axios.get('http://localhost:8000/api/shop/'+user.shop_id);
             const shop = targetShop.data[0];
             const targetPayment = await axios.get('http://localhost:8000/api/payment/'+user.payment_id);
             const payment = targetPayment.data[0];
-            console.log(user)
+            // console.log(user)
             dispatch({ type: 'LOGIN', payload: {user, shop, payment, userCart}});
             navigate('/home')
         }

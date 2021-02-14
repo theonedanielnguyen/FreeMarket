@@ -1,13 +1,30 @@
-import { navigate } from '@reach/router';
 import React from 'react';
+import axios from 'axios';
+import { navigate } from '@reach/router';
 import { useSelector } from 'react-redux';
 import { Button, Container, Dropdown, Form, Icon, Input, Menu } from 'semantic-ui-react';
 
 const TopNavBar = () => {
     const user = useSelector(state => state.loggedInUser);
+    const shoppingCart = useSelector(state => state.shoppingCart);
 
     const handleSearch = () => {
         navigate('/search')
+    }
+
+    const logOutPath = () => {
+        const saveUser = {
+            ...user,
+            cart: {
+                total: shoppingCart.total,
+                items: [...shoppingCart.items],
+            }
+        }
+        axios.put('http://localhost:8000/api/users/'+user._id, saveUser)
+            .then(res => {
+                navigate('/')
+            })
+            .catch(err => console.log(err))
     }
 
     return (
@@ -39,9 +56,7 @@ const TopNavBar = () => {
                     </Menu.Item>
                     <Menu.Item>
                         <Button 
-                            onClick={()=>{
-                                navigate('/');
-                                }} 
+                            onClick={()=>logOutPath()} 
                             animated>
                             <Button.Content visible>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Log Out &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button.Content>
                             <Button.Content hidden>Come back soon!</Button.Content>
