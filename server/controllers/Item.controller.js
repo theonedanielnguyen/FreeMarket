@@ -35,3 +35,12 @@ module.exports.random = (req, res) => {
         .then(selection => res.json(selection))
         .catch(err => res.json(err))
 }
+
+module.exports.search = (req, res) => {
+    var searchQuery = req.params.searchQuery
+    Item.find({"name":new RegExp(req.params.searchQuery, 'i')})
+        .then(search => res.json(search))
+        .catch(err => {
+            console.log(err);
+        })
+}

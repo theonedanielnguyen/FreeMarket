@@ -8,6 +8,7 @@ module.exports = function(app) {
     app.get('/api/item/all', ItemController.getAllItems);
     app.get('/api/item/count', ItemController.getItemCount);
     app.get('/api/item/random/:num', ItemController.random);
+    app.get('/api/item/search/:searchQuery', ItemController.search);
     app.get('/api/item/:id', ItemController.getOneItem);
     app.put('/api/item/:id', ItemController.updateItem);    
 

@@ -25,7 +25,7 @@ function App() {
         <StoreManagement path="/storeManagement" />
         <NewItem path="/newProduct" />
         <PersonalData path="/personalData" />
-        <Search path='/search' />
+        <Search path='/search/:searchParameters' />
       </Router>
     </div>
   );

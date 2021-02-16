@@ -8,8 +8,9 @@ const TopNavBar = () => {
     const user = useSelector(state => state.loggedInUser);
     const shoppingCart = useSelector(state => state.shoppingCart);
 
-    const handleSearch = () => {
-        navigate('/search')
+    const handleSearch = (e) => {
+        const searchQuery = e.target.search.value;
+        navigate(`/search/${searchQuery}`);
     }
 
     const logOutPath = () => {
@@ -36,6 +37,7 @@ const TopNavBar = () => {
                 <Menu.Item>
                     <Form onSubmit={handleSearch}>
                         <Input 
+                            name='search'
                             type='text'
                             action={{
                                 icon:'search'
