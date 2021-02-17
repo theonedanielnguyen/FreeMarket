@@ -11,6 +11,7 @@ import StoreManagement from './views/StoreManagement';
 import Cart from './views/Cart';
 import Search from './views/Search';
 import PersonalData from './views/PersonalData';
+import EditItem from './views/EditItem';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <NewItem path="/newProduct" />
         <PersonalData path="/personalData" />
         <Search path='/search/:searchParameters' />
+        <EditItem path='/products/:productID' />
       </Router>
     </div>
   );

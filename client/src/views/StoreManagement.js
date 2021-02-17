@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Header } from 'semantic-ui-react';
-import ItemDisplay from '../components/ItemDisplay';
+import PersonalItemDisplay from '../components/PersonalItemDisplay';
 import TopNavBar from '../components/TopNavBar';
 
 const StoreManagement = () => {
@@ -11,7 +11,7 @@ const StoreManagement = () => {
         <Container fluid>
             <TopNavBar />
             <Header size='huge'>Your Products</Header>
-            <ItemDisplay items={shop.itemsSold}/>
+            <PersonalItemDisplay items={shop.itemsSold}/>
         </Container>
     )
 }
