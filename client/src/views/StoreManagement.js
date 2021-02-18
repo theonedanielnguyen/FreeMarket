@@ -6,7 +6,7 @@ import TopNavBar from '../components/TopNavBar';
 
 const StoreManagement = () => {
     const shop = useSelector(state => state.userShop);
-    console.log(shop);
+    
     return (
         <Container fluid>
             <TopNavBar />

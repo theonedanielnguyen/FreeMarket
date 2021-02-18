@@ -96,7 +96,7 @@ const ItemForm = (props) => {
                             <Button
                                 type='submit'
                                 size='large'
-                                content='Create Product'
+                                content='Submit'
                                 color='green'
                                 />
                             <Button.Or />
