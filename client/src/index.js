@@ -71,6 +71,12 @@ function reducer(state = initialState, action) {
         }
       }
 
+    case 'DELETE_ITEM':
+      return {
+        ...state,
+        userShop: action.payload.shop
+      }
+
     case 'LOGOUT':
       return {
         ...initialState

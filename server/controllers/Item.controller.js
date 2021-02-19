@@ -44,3 +44,9 @@ module.exports.search = (req, res) => {
             console.log(err);
         })
 }
+
+module.exports.deleteItem = (req, res) => {
+    Item.deleteOne({_id:req.params.id})
+        .then(confirm => res.json(confirm))
+        .catch(err => res.json(err))
+}

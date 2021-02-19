@@ -51,11 +51,11 @@ const ProductCard = (props) => {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button as='div' labelPosition='left'>
+                <Button as='div' fluid labelPosition='left'>
                     <Label basic pointing='right'>
                         ${product.price}
                     </Label>
-                    <Button icon onClick={()=>addToCart()} animated='fade'>
+                    <Button icon fluid onClick={()=>addToCart()} animated='fade'>
                         <Button.Content visible>
                             <Icon name='shopping cart' />
                             &nbsp;&nbsp;Add to Cart
