@@ -35,13 +35,13 @@ const ProductCard = (props) => {
     }
 
     return (
-        <Card>
+        <Card raised>
             <Image src={product.imageURL} 
             size='large'
-            // style={{height:'500px'}}
+            // style={{width:'100%', }}
             // href='/details'
             />
-            <Card.Content 
+            <Card.Content style={{paddingTop:'auto'}}
                 // as='a' 
                 // onClick={()=>navigate('/details')}
                 >
