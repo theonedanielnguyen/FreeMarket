@@ -32,4 +32,10 @@
   In the case that I decide to host for display purposes, I will most likely be using Amazon AWS-EC2 as I have the most familiarity with it.
 
 ## Demo:
-    Screenshots forthcoming.
+  ![Welcome](git_photos/Welcome.PNG "Welcome Page")
+  ![Registration](git_photos/Register.PNG "Registration Page")
+  ![Dashboard](git_photos/Dashboard.PNG "Dashboard")
+  ![Create Product](git_photos/CreateProductFilledOut.PNG "Create Product")
+  ![Personal Information](git_photos/PersonalInformation.PNG "Personal Information")
+
+  More photos are available in the [Photography file](/git_photos).
