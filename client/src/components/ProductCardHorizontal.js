@@ -9,17 +9,9 @@ const ProductCardHorizontal = (props) => {
     const dispatch = useDispatch();
     const [ product, setProduct ] = useState({})
 
-    // const fakeItem = {
-    //     name: "Product Name",
-    //     imageURL: "https://images-na.ssl-images-amazon.com/images/I/71zNWbTHzxL._SL1500_.jpg",
-    //     price: 25.00,
-    //     description: "A nice buncha flow'rs",
-    // }
-
     const removeItem = () => {
         const newTotal = shoppingCart.total - product.price;
         const newItems = shoppingCart.items.filter(item => item !== productID);
-        // console.log(newItems)
         dispatch({ type: 'REMOVE_FROM_CART', payload: {newTotal, newItems}})
     }
 

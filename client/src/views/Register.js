@@ -5,7 +5,6 @@ import { navigate } from '@reach/router';
 import { useDispatch } from 'react-redux';
 
 const Register = () => {
-    // const user = useSelector(state => state.loggedInUser);
     const dispatch = useDispatch();
 
     const [firstName, setFirstName] = useState("");
@@ -28,34 +27,31 @@ const Register = () => {
         try {
             const newUserResponse = await axios.post('http://localhost:8000/api/users/new', newUser);
             const targetUser = newUserResponse.data;
-            const newShop = {shopOwner: targetUser._id};
-            const newShopResponse = await axios.post('http://localhost:8000/api/shop/new', newShop);
-            const targetShop = newShopResponse.data;
-            const newPayment = {cardOwner: targetUser._id};
-            const newPaymentResponse = await axios.post('http://localhost:8000/api/payment/new', newPayment);
-            const targetPayment = newPaymentResponse.data;
-            console.log(targetPayment);
-            targetUser["shop_id"] = targetShop._id;
-            targetUser["payment_id"] = targetPayment._id;
-            const updateUserResponse = await axios.put('http://localhost:8000/api/users/'+targetUser._id, targetUser);
-            console.log(updateUserResponse);
-            dispatch({type: 'REGISTER', payload: {targetUser, targetShop, targetPayment}});
-            navigate('/home');
+            console.log(newUserResponse)
+            if (newUserResponse.data.hasOwnProperty('errors')) {
+                throw new Error(newUserResponse)
+            }
+            else {
+                const newShop = {shopOwner: targetUser._id};
+                const newShopResponse = await axios.post('http://localhost:8000/api/shop/new', newShop);
+                const targetShop = newShopResponse.data;
+                const newPayment = {cardOwner: targetUser._id};
+                const newPaymentResponse = await axios.post('http://localhost:8000/api/payment/new', newPayment);
+                const targetPayment = newPaymentResponse.data;
+                console.log(targetPayment);
+                targetUser["shop_id"] = targetShop._id;
+                targetUser["payment_id"] = targetPayment._id;
+                const updateUserResponse = await axios.put('http://localhost:8000/api/users/'+targetUser._id,   targetUser);
+                console.log(updateUserResponse);
+                dispatch({type: 'REGISTER', payload: {targetUser, targetShop, targetPayment}});
+                navigate('/home');
+            }
+            
         }
         catch(error){
             console.log(error);
         }
 
-        // axios.post('http://localhost:8000/api/users/new', newUser)
-        //     .then(res => {
-        //         let userId = res.data._id;
-        //         let newShop = {shopOwner: userId}
-        //         axios.post('http://localhost:8000/api/shop/new', newShop)
-        //             .then(res=> {
-
-        //             })
-        //     })
-        //     .catch(err => console.log(err))
     }
 
     return(

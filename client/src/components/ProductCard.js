@@ -9,19 +9,11 @@ const ProductCard = (props) => {
     const shoppingCart = useSelector(state => state.shoppingCart);
     const dispatch = useDispatch();
     const [ product, setProduct ] = useState({});
-    
-    // const fakeItem = {
-    //     name: "Product Name",
-    //     imageURL: "https://images-na.ssl-images-amazon.com/images/I/71zNWbTHzxL._SL1500_.jpg",
-    //     price: 25,
-    //     description: "A nice set of glassware",
-    // }
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/item/" + productID)
             .then(res => {
                 setProduct(res.data[0]);
-                // setProduct(fakeItem);
             })
             .catch(err => console.log(err));
     }, [productID]);
@@ -29,7 +21,6 @@ const ProductCard = (props) => {
     const addToCart = () => {
         const newTotal = shoppingCart.total + product.price;
         const newItems = [...shoppingCart.items, productID];
-        // console.log(newItems)
         dispatch({type: 'ADD_ITEM_TO_CART', payload: {newItems, newTotal}});
         navigate('/cart')
     }
@@ -38,8 +29,6 @@ const ProductCard = (props) => {
         <Card raised>
             <Image src={product.imageURL} 
             size='large'
-            // style={{width:'100%', }}
-            // href='/details'
             />
             <Card.Content style={{paddingTop:'auto'}}
                 // as='a' 
