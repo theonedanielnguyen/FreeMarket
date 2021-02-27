@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 module.exports.createUser = (req, res) => {
     User.create(req.body)
         .then(user => res.json(user))
-        .catch(err => res.json(err))
+        .catch(err => res.status(400).json(err))
 }
 
 module.exports.getOneUser = (req, res) => {

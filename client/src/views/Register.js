@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, Container, Form, Grid, Header, Icon, Message, Segment } from 'semantic-ui-react';
 import { navigate } from '@reach/router';
@@ -12,6 +12,14 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    const [errors, setErrors] = useState({});
+    const [firstNameError, setFirstNameError] = useState();
+    const [lastNameError, setLastNameError] = useState();
+    const [emailError, setEmailError] = useState();
+    const [passwordError, setPasswordError] = useState();
+    const [confirmPasswordError, setConfirmPasswordError] = useState();
+
 
     async function registerHandler(e) {
         e.preventDefault();
@@ -28,10 +36,10 @@ const Register = () => {
             const newUserResponse = await axios.post('http://localhost:8000/api/users/new', newUser);
             const targetUser = newUserResponse.data;
             console.log(newUserResponse)
-            if (newUserResponse.data.hasOwnProperty('errors')) {
-                throw new Error(newUserResponse)
-            }
-            else {
+            // if (newUserResponse.data.hasOwnProperty('errors')) {
+            //     throw new Error(newUserResponse)
+            // }
+            // else {
                 const newShop = {shopOwner: targetUser._id};
                 const newShopResponse = await axios.post('http://localhost:8000/api/shop/new', newShop);
                 const targetShop = newShopResponse.data;
@@ -45,14 +53,52 @@ const Register = () => {
                 console.log(updateUserResponse);
                 dispatch({type: 'REGISTER', payload: {targetUser, targetShop, targetPayment}});
                 navigate('/home');
-            }
+            // }
             
         }
         catch(error){
-            console.log(error);
+            // console.log(error);
+            const errorResponse = error.response.data.errors;
+            const errorObject = {};
+            for (const key of Object.keys(errorResponse)) {
+                errorObject[key] = errorResponse[key].message;
+            }
+            console.log(errorObject);
+            setErrors(errorObject);
         }
-
     }
+
+    const errorCheck = () => {
+        setFirstNameError(errors.hasOwnProperty('firstName')?
+            {content: errors.firstName, pointing: 'above'}
+            :
+            false
+        )
+        setLastNameError(errors.hasOwnProperty('lastName')?
+            {content: errors.lastName, pointing: 'above'}
+            :
+            false
+        )
+        setEmailError(errors.hasOwnProperty('email')?
+            {content: errors.email, pointing: 'above'}
+            :
+            false
+        )
+        setPasswordError(errors.hasOwnProperty('password')?
+            {content: errors.password, pointing: 'above'}
+            :
+            false
+        )
+        setConfirmPasswordError(errors.hasOwnProperty('confirmPassword')?
+            {content: errors.confirmPassword, pointing: 'above'}
+            :
+            false
+        )
+    }
+
+    useEffect(() => {
+        errorCheck()
+    }, [errors])
 
     return(
         <Container fluid>
@@ -72,6 +118,7 @@ const Register = () => {
                                     value={firstName}
                                     onChange={(e)=>setFirstName(e.target.value)}
                                     type='text'
+                                    error={firstNameError}
                                     />
                                 <Form.Input fluid
                                     name='lastName'
@@ -81,6 +128,7 @@ const Register = () => {
                                     value={lastName}
                                     onChange={(e)=>setLastName(e.target.value)}
                                     type='text'
+                                    error={lastNameError}
                                     />
                             </Form.Group>
                             <Form.Input
@@ -92,6 +140,7 @@ const Register = () => {
                                 value={email}
                                 onChange={(e)=>setEmail(e.target.value)}
                                 type='email'
+                                error={emailError}
                                 />
                             <Form.Group widths='equal'>
                                 <Form.Input fluid
@@ -102,6 +151,7 @@ const Register = () => {
                                     value={password}
                                     onChange={(e)=>setPassword(e.target.value)}
                                     type='password'
+                                    error={passwordError}
                                     />
                                 <Form.Input fluid
                                     name='confirmPassword'
@@ -111,6 +161,7 @@ const Register = () => {
                                     value={confirmPassword}
                                     onChange={(e)=>setConfirmPassword(e.target.value)}
                                     type='password'
+                                    error={confirmPasswordError}
                                     />
                             </Form.Group>
                             <Button
