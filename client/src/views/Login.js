@@ -10,6 +10,8 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [error, setError] = useState("");
+
     const loginHandler = async (e) => {
         e.preventDefault();
         const userLogin = {
@@ -31,7 +33,11 @@ const Login = () => {
             navigate('/home')
         }
         catch(error) {
-            console.log(error);
+            const errorResponse = error.response.data
+            errorResponse['notInDatabase']? 
+            setError({content: errorResponse['notInDatabase'], pointing: 'above'})
+            :
+            errorResponse['mismatch']? setError({content: errorResponse['mismatch'], pointing: 'above'}) : setError('')
         }
     }
     return (
@@ -61,6 +67,7 @@ const Login = () => {
                             type='password'
                             value={password}
                             onChange={(e)=>setPassword(e.target.value)}
+                            error={error}
                             />
                         <Button
                             type='submit'
