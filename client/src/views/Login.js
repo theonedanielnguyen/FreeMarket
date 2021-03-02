@@ -10,7 +10,8 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [error, setError] = useState("");
+    const [missingError, setMissingError] = useState();
+    const [mismatchError, setMismatchError] = useState();
 
     const loginHandler = async (e) => {
         e.preventDefault();
@@ -35,9 +36,9 @@ const Login = () => {
         catch(error) {
             const errorResponse = error.response.data
             errorResponse['notInDatabase']? 
-            setError({content: errorResponse['notInDatabase'], pointing: 'above'})
+            setMissingError({content: errorResponse['notInDatabase'], pointing: 'above'})
             :
-            errorResponse['mismatch']? setError({content: errorResponse['mismatch'], pointing: 'above'}) : setError('')
+            errorResponse['mismatch']? setMismatchError({content: errorResponse['mismatch'], pointing: 'above'}) : setMissingError()
         }
     }
     return (
@@ -56,7 +57,9 @@ const Login = () => {
                             placeholder='E-Mail'
                             type='email'
                             value={email}
-                            onChange={(e)=>setEmail(e.target.value)}
+                            onChange={(e)=>{setEmail(e.target.value)
+                                            setMissingError()}}
+                            error={missingError}
                             />
                         <Form.Input
                             fluid
@@ -66,8 +69,9 @@ const Login = () => {
                             placeholder='Password'
                             type='password'
                             value={password}
-                            onChange={(e)=>setPassword(e.target.value)}
-                            error={error}
+                            onChange={(e)=>{setPassword(e.target.value)
+                                            setMismatchError()}}
+                            error={mismatchError}
                             />
                         <Button
                             type='submit'
