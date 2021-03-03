@@ -55,7 +55,7 @@ const PersonalProductCard = (props) => {
                     <Label basic pointing='right'>
                         ${product.price}
                     </Label>
-                    <Button icon fluid onClick={()=>editProduct()}>
+                    <Button fluid color='yellow' onClick={()=>editProduct()}>
                         Edit Product
                     </Button>
                 </Button>

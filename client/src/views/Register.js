@@ -68,35 +68,35 @@ const Register = () => {
         }
     }
 
-    const errorCheck = () => {
-        setFirstNameError(errors.hasOwnProperty('firstName')?
-            {content: errors.firstName, pointing: 'above'}
-            :
-            false
-        )
-        setLastNameError(errors.hasOwnProperty('lastName')?
-            {content: errors.lastName, pointing: 'above'}
-            :
-            false
-        )
-        setEmailError(errors.hasOwnProperty('email')?
-            {content: errors.email, pointing: 'above'}
-            :
-            false
-        )
-        setPasswordError(errors.hasOwnProperty('password')?
-            {content: errors.password, pointing: 'above'}
-            :
-            false
-        )
-        setConfirmPasswordError(errors.hasOwnProperty('confirmPassword')?
-            {content: errors.confirmPassword, pointing: 'above'}
-            :
-            false
-        )
-    }
-
     useEffect(() => {
+        const errorCheck = () => {
+            setFirstNameError(errors.hasOwnProperty('firstName')?
+                {content: errors.firstName, pointing: 'above'}
+                :
+                false
+            )
+            setLastNameError(errors.hasOwnProperty('lastName')?
+                {content: errors.lastName, pointing: 'above'}
+                :
+                false
+            )
+            setEmailError(errors.hasOwnProperty('email')?
+                {content: errors.email, pointing: 'above'}
+                :
+                false
+            )
+            setPasswordError(errors.hasOwnProperty('password')?
+                {content: errors.password, pointing: 'above'}
+                :
+                false
+            )
+            setConfirmPasswordError(errors.hasOwnProperty('confirmPassword')?
+                {content: errors.confirmPassword, pointing: 'above'}
+                :
+                false
+            )
+        }
+
         errorCheck()
     }, [errors])
 
@@ -116,7 +116,8 @@ const Register = () => {
                                     iconPosition='left'
                                     placeholder='First Name'
                                     value={firstName}
-                                    onChange={(e)=>setFirstName(e.target.value)}
+                                    onChange={(e)=>{setFirstName(e.target.value)
+                                                    setFirstNameError()}}
                                     type='text'
                                     error={firstNameError}
                                     />
@@ -126,7 +127,8 @@ const Register = () => {
                                     iconPosition='left'
                                     placeholder='Last Name'
                                     value={lastName}
-                                    onChange={(e)=>setLastName(e.target.value)}
+                                    onChange={(e)=>{setLastName(e.target.value)
+                                                    setLastNameError()}}
                                     type='text'
                                     error={lastNameError}
                                     />
@@ -138,7 +140,8 @@ const Register = () => {
                                 iconPosition='left'
                                 placeholder='E-Mail'
                                 value={email}
-                                onChange={(e)=>setEmail(e.target.value)}
+                                onChange={(e)=>{setEmail(e.target.value)
+                                                setEmailError()}}
                                 type='email'
                                 error={emailError}
                                 />
@@ -149,7 +152,9 @@ const Register = () => {
                                     iconPosition='left'
                                     placeholder='Password'
                                     value={password}
-                                    onChange={(e)=>setPassword(e.target.value)}
+                                    onChange={(e)=>{setPassword(e.target.value)
+                                                    setPasswordError()
+                                                    setConfirmPasswordError()}}
                                     type='password'
                                     error={passwordError}
                                     />
@@ -159,7 +164,9 @@ const Register = () => {
                                     iconPosition='left'
                                     placeholder='Confirm Password'
                                     value={confirmPassword}
-                                    onChange={(e)=>setConfirmPassword(e.target.value)}
+                                    onChange={(e)=>{setConfirmPassword(e.target.value)
+                                                    setPasswordError()
+                                                    setConfirmPasswordError()}}
                                     type='password'
                                     error={confirmPasswordError}
                                     />
