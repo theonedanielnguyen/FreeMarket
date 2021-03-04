@@ -10,7 +10,9 @@ const TopNavBar = () => {
 
     const handleSearch = (e) => {
         const searchQuery = e.target.search.value;
-        navigate(`/search/${searchQuery}`);
+        if (searchQuery.length > 0) {
+            navigate(`/search/${searchQuery}`)
+        }
     }
 
     const logOutPath = () => {

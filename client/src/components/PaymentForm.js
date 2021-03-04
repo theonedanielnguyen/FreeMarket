@@ -36,7 +36,7 @@ const PaymentForm = () => {
 
     const handleCancel = () => {
         setCardNumber(payment.cardNumber);
-        setExpirationDate(payment.expirationDate);
+        setExpirationDate(moment(payment.expirationDate).format('yyyy-MM'));
         setSecurityCode(payment.securityCode);
         setEditable(false);
     }

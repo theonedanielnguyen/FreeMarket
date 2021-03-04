@@ -35,7 +35,6 @@ const AddressForm = () => {
     }
 
     const handleCancel = () => {
-        console.log(user)
         setStreetAddress(user.streetAddress);
         setCity(user.city);
         setState(user.state);
