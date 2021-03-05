@@ -9,6 +9,7 @@ const ProductCard = (props) => {
     const shoppingCart = useSelector(state => state.shoppingCart);
     const dispatch = useDispatch();
     const [ product, setProduct ] = useState({});
+    const [ productOwner, setProductOwner ] = useState('');
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/item/" + productID)
@@ -17,6 +18,14 @@ const ProductCard = (props) => {
             })
             .catch(err => console.log(err));
     }, [productID]);
+
+    const loadProduct = async () => {
+        const target = await axios.get("http://localhost:8000/api/item/" + productID);
+        setProduct(target.data[0]);
+        const owner = await axios.get("http://localhost:8000/api/users/" + target.data[0]['creator_id']);
+        const ownerName = `${owner.data.firstName} ${owner.data.lastName}`;
+        setProductOwner(ownerName);
+    }
 
     const addToCart = () => {
         const newTotal = shoppingCart.total + product.price;
@@ -38,6 +47,9 @@ const ProductCard = (props) => {
                 <Card.Description>
                     {product.description}
                 </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+                For Sale By: 
             </Card.Content>
             <Card.Content extra>
                 <Button as='div' fluid labelPosition='left'>
