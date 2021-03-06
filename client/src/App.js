@@ -12,6 +12,7 @@ import Cart from './views/Cart';
 import Search from './views/Search';
 import PersonalData from './views/PersonalData';
 import EditItem from './views/EditItem';
+import Shop from './views/Shop';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <PersonalData path="/personalData" />
         <Search path='/search/:searchParameters' />
         <EditItem path='/products/:productID' />
+        <Shop path='/shop/:shopID' />
       </Router>
     </div>
   );

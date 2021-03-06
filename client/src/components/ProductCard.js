@@ -11,21 +11,29 @@ const ProductCard = (props) => {
     const [ product, setProduct ] = useState({});
     const [ productOwner, setProductOwner ] = useState('');
 
-    useEffect(() => {
-        axios.get("http://localhost:8000/api/item/" + productID)
-            .then(res => {
-                setProduct(res.data[0]);
-            })
-            .catch(err => console.log(err));
-    }, [productID]);
+    // useEffect(() => {
+    //     axios.get("http://localhost:8000/api/item/" + productID)
+    //         .then(res => {
+    //             setProduct(res.data[0]);
+    //         })
+    //         .catch(err => console.log(err));
+    // }, [productID]);
 
-    const loadProduct = async () => {
-        const target = await axios.get("http://localhost:8000/api/item/" + productID);
-        setProduct(target.data[0]);
-        const owner = await axios.get("http://localhost:8000/api/users/" + target.data[0]['creator_id']);
-        const ownerName = `${owner.data.firstName} ${owner.data.lastName}`;
-        setProductOwner(ownerName);
-    }
+    useEffect(() => {
+        const loadProduct = async () => {
+            try{
+                const target = await axios.get("http://localhost:8000/api/item/" + productID);
+                setProduct(target.data[0]);
+                const owner = await axios.get("http://localhost:8000/api/users/" + target.data[0]['creator_id']);
+                const ownerName = `${owner.data[0].firstName} ${owner.data[0].lastName}`;
+                setProductOwner(ownerName);
+            }
+            catch(err) {
+                console.log(err)
+            }
+        }
+        loadProduct();
+    }, [productID])
 
     const addToCart = () => {
         const newTotal = shoppingCart.total + product.price;
@@ -49,7 +57,7 @@ const ProductCard = (props) => {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                For Sale By: 
+                For Sale By: <Button onClick={()=>{navigate('/shop/'+product.shop_id)}}>{productOwner}</Button>
             </Card.Content>
             <Card.Content extra>
                 <Button as='div' fluid labelPosition='left'>
