@@ -40,7 +40,7 @@ const Register = () => {
             //     throw new Error(newUserResponse)
             // }
             // else {
-                const newShop = {shopOwner: targetUser._id};
+                const newShop = {owner_id: targetUser._id};
                 const newShopResponse = await axios.post('http://localhost:8000/api/shop/new', newShop);
                 const targetShop = newShopResponse.data;
                 const newPayment = {cardOwner: targetUser._id};
