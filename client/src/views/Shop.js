@@ -7,6 +7,7 @@ import TopNavBar from '../components/TopNavBar';
 const Shop = (props) => {
     const shopID = props.shopID;
     const [ shopItems, setShopItems ] = useState([])
+    const [ shopOwner, setShopOwner ] = useState('')
     const [ loaded, setLoaded ] = useState(false);
 
     useEffect(() => {
@@ -16,7 +17,8 @@ const Shop = (props) => {
                 const shop = targetShop.data[0];
                 const newItems = shop.itemsSold;
                 const shopOwner = await axios.get('http://localhost:8000/api/users/'+ shop.owner_id);
-                console.log(shop)
+                const ownerData = shopOwner.data[0];
+                setShopOwner(`${ownerData.firstName} ${ownerData.lastName}`)
                 setShopItems(newItems);
                 setLoaded(true);
             }
@@ -26,12 +28,12 @@ const Shop = (props) => {
         }
 
         pageLoader()
-    }, [])
+    }, [shopID])
     return(
         <Container fluid>
             <TopNavBar />
             <Header size='huge'>
-                User Shop
+                {shopOwner}'s Shop
             </Header>
             {loaded?
                 <ItemDisplay items={shopItems} />
