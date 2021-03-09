@@ -64,12 +64,12 @@ const ProductCard = (props) => {
                     <Label basic pointing='right'>
                         ${product.price}
                     </Label>
-                    <Button icon fluid onClick={()=>addToCart()} animated='fade'>
+                    <Button icon fluid onClick={()=>addToCart()} animated='fade' color='green'>
                         <Button.Content visible>
                             <Icon name='shopping cart' />
                             &nbsp;&nbsp;Add to Cart
                         </Button.Content>
-                        <Button.Content hidden style={{color:'green'}}>
+                        <Button.Content hidden style={{color:'black'}}>
                             <Icon name='shopping cart' />
                             &nbsp;&nbsp;Add to Cart
                         </Button.Content>
