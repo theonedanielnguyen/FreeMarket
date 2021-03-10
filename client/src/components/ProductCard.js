@@ -57,7 +57,7 @@ const ProductCard = (props) => {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                For Sale By: <Button onClick={()=>{navigate('/shop/'+product.shop_id)}}>{productOwner}</Button>
+                Sold By: <Button onClick={()=>{navigate('/shop/'+product.shop_id)}}>{productOwner}</Button>
             </Card.Content>
             <Card.Content extra>
                 <Button as='div' fluid labelPosition='left'>
