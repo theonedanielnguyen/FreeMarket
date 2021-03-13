@@ -1,15 +1,32 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Button, Form, Header, Segment } from 'semantic-ui-react';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Container, Form, Header, Segment } from 'semantic-ui-react';
 
 const StoreInformationForm = () => {
     const shop = useSelector(state => state.userShop);
+    const dispatch = useDispatch();
 
     const [ description, setDescription ] = useState(shop.description);
     const [ editable, setEditable ] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const newShop = {
+            ...shop,
+            description:description
+        }
+
+        try{
+            const updatedShop = await axios.put('http://localhost:8000/api/shop/'+shop._id, newShop);
+            dispatch({ type: 'UPDATE_SHOP', payload: {updatedShop:updatedShop.data}})
+        }
+        catch(error){
+            console.log(error)
+        }
+
+        setEditable(false);
     }
 
     const handleCancel = () => {
@@ -18,9 +35,9 @@ const StoreInformationForm = () => {
     }
 
     return (
-        <>
+        <Container>
             <Header size='large'>
-                Store Information
+                Store Description
             </Header>
             <Form onSubmit={handleSubmit}>
                 <Segment raised>
@@ -68,7 +85,7 @@ const StoreInformationForm = () => {
                     }
                 </Segment>
             </Form>
-        </>
+        </Container>
     )
 }
 

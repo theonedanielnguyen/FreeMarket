@@ -81,10 +81,16 @@ function reducer(state = initialState, action) {
       return {
         ...initialState
       }
+
+    case 'UPDATE_SHOP':
+      return {
+        ...state,
+        userShop: action.payload.updatedShop,
+      }
     
     case 'UPDATE_ADDRESS':
       return {
-        state,
+        ...state,
         loggedInUser: action.payload.updatedUser,
       }
 
