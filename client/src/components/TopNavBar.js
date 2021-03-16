@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { navigate } from '@reach/router';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,21 @@ import { Button, Container, Dropdown, Form, Icon, Input, Menu } from 'semantic-u
 const TopNavBar = () => {
     const user = useSelector(state => state.loggedInUser);
     const shoppingCart = useSelector(state => state.shoppingCart);
+
+    const [ userCheck, setUserCheck ] = useState(false);
+
+    useEffect(() => {
+        const userCheck = () => {
+                if (user === null||undefined) {
+                    navigate('/')
+                }
+                else {
+                    setUserCheck(true)
+                }
+            }
+
+        userCheck();
+    }, [user])
 
     const handleSearch = (e) => {
         const searchQuery = e.target.search.value;
@@ -32,6 +47,8 @@ const TopNavBar = () => {
 
     return (
         <Container fluid>
+            {userCheck &&
+            <>
             <Menu inverted color='green' borderless attached='top'>
                 <Menu.Item as='a' header onClick={()=>navigate('/home')}>
                     <h1>FreeMarket</h1>
@@ -81,6 +98,8 @@ const TopNavBar = () => {
                     <Menu.Item as='a' onClick={()=>navigate('/personalData')}>Personal Data</Menu.Item>
                 </Menu.Menu>
             </Menu>
+            </>
+            }
         </Container>
     )
 }
