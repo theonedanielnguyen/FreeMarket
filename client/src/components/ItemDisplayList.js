@@ -6,6 +6,14 @@ import ProductCardHorizontal from '../components/ProductCardHorizontal';
 const ItemDisplayList = () => {
     const shoppingCart = useSelector(state => state.shoppingCart);
 
+    const checkoutFunction = async () => {
+        //This may need to be on a checkout page.
+        //Check payment and address Information
+        //Create a log of the transaction
+        //Remove items from cart
+        //Redirect to home page.
+    }
+
     return (
         <Container fluid style={{paddingTop:'1em', paddingRight: '20px', paddingLeft:'20px'}}>
             <Grid centered style={{marginTop:'1em'}}>
@@ -27,7 +35,7 @@ const ItemDisplayList = () => {
                                 </Item.Description>
                             </Item.Content>
                             <Item.Extra>
-                                <Button floated='right' color='twitter' style={{marginTop: '1em'}}>
+                                <Button floated='right' color='twitter' style={{marginTop: '1em'}} onClick={checkoutFunction}>
                                     Checkout
                                 </Button>
                             </Item.Extra>
