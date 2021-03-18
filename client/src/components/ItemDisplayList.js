@@ -4,15 +4,18 @@ import { useSelector } from 'react-redux';
 import ProductCardHorizontal from '../components/ProductCardHorizontal';
 
 const ItemDisplayList = () => {
+    const user = useSelector(state => state.loggedInUser);
     const shoppingCart = useSelector(state => state.shoppingCart);
+    const userPayment = useSelector(state => state.userPayment);
 
-    const checkoutFunction = async () => {
+    const [ addressModalOpen, setAddressModalOpen ] = React.useState(false);
+    const [ paymentModalOpen, setPaymentModalOpen ] = React.useState(false);
+
         //This may need to be on a checkout page.
         //Check payment and address Information
         //Create a log of the transaction
         //Remove items from cart
         //Redirect to home page.
-    }
 
     return (
         <Container fluid style={{paddingTop:'1em', paddingRight: '20px', paddingLeft:'20px'}}>
@@ -35,7 +38,7 @@ const ItemDisplayList = () => {
                                 </Item.Description>
                             </Item.Content>
                             <Item.Extra>
-                                <Button floated='right' color='twitter' style={{marginTop: '1em'}} onClick={checkoutFunction}>
+                                <Button floated='right' color='twitter' style={{marginTop: '1em'}} onClick={() => setAddressModalOpen(true)}>
                                     Checkout
                                 </Button>
                             </Item.Extra>
