@@ -1,12 +1,11 @@
 import React from 'react';
-import { Button, Container, Grid, Item } from 'semantic-ui-react';
+import { Button, Container, Grid, Icon, Item, Modal } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import ProductCardHorizontal from '../components/ProductCardHorizontal';
+import AddressForm from './AddressForm';
 
 const ItemDisplayList = () => {
-    const user = useSelector(state => state.loggedInUser);
     const shoppingCart = useSelector(state => state.shoppingCart);
-    const userPayment = useSelector(state => state.userPayment);
 
     const [ addressModalOpen, setAddressModalOpen ] = React.useState(false);
     const [ paymentModalOpen, setPaymentModalOpen ] = React.useState(false);
@@ -48,6 +47,20 @@ const ItemDisplayList = () => {
                 </Grid.Row>
                 
             </Grid>
+            <Modal
+                onClose={() => setAddressModalOpen(false)}
+                onOpen={() => setAddressModalOpen(true)}
+                open={addressModalOpen}
+                >
+                    <Modal.Header>Confirm Personal Information</Modal.Header>
+                    <Modal.Content>
+                        <AddressForm />
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button onClick={() => setAddressModalOpen(false)} color='red'>Cancel</Button>
+                        <Button onClick={() => setPaymentModalOpen(true)} color='green'>Looks good! <Icon name='right chevron' /></Button>
+                    </Modal.Actions>
+                </Modal>
         </Container>
     )
 }
