@@ -3,6 +3,8 @@ import { Button, Container, Grid, Icon, Item, Modal } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import ProductCardHorizontal from '../components/ProductCardHorizontal';
 import AddressForm from './AddressForm';
+import PaymentForm from './PaymentForm';
+import { navigate } from '@reach/router';
 
 const ItemDisplayList = () => {
     const shoppingCart = useSelector(state => state.shoppingCart);
@@ -15,6 +17,10 @@ const ItemDisplayList = () => {
         //Create a log of the transaction
         //Remove items from cart
         //Redirect to home page.
+
+    const checkout = async () => {
+        navigate('/home')
+    }
 
     return (
         <Container fluid style={{paddingTop:'1em', paddingRight: '20px', paddingLeft:'20px'}}>
@@ -51,16 +57,31 @@ const ItemDisplayList = () => {
                 onClose={() => setAddressModalOpen(false)}
                 onOpen={() => setAddressModalOpen(true)}
                 open={addressModalOpen}
+            >
+                <Modal.Header>Confirm Personal Information</Modal.Header>
+                <Modal.Content>
+                    <AddressForm />
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button onClick={() => setAddressModalOpen(false)} color='red'>Cancel</Button>
+                    <Button onClick={() => setPaymentModalOpen(true)} color='green'>Looks good! <Icon name='right chevron' /></Button>
+                </Modal.Actions>
+
+                {/*Sub Modal*/}
+                <Modal
+                    onClose={()=>setPaymentModalOpen(false)}
+                    open={paymentModalOpen}
                 >
-                    <Modal.Header>Confirm Personal Information</Modal.Header>
                     <Modal.Content>
-                        <AddressForm />
+                        <PaymentForm />
                     </Modal.Content>
                     <Modal.Actions>
-                        <Button onClick={() => setAddressModalOpen(false)} color='red'>Cancel</Button>
-                        <Button onClick={() => setPaymentModalOpen(true)} color='green'>Looks good! <Icon name='right chevron' /></Button>
+                        <Button onClick={() => {setAddressModalOpen(false); setPaymentModalOpen(false)}} color='red'>Cancel</Button>
+                        <Button onClick={() => setPaymentModalOpen(false)} color='yellow'>Back</Button>
+                        <Button onClick={() => checkout()} color='green'>Checkout</Button>
                     </Modal.Actions>
                 </Modal>
+            </Modal>
         </Container>
     )
 }
