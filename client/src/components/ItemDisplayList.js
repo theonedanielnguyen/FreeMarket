@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Container, Grid, Icon, Item, Modal } from 'semantic-ui-react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductCardHorizontal from '../components/ProductCardHorizontal';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
@@ -8,17 +8,17 @@ import { navigate } from '@reach/router';
 
 const ItemDisplayList = () => {
     const shoppingCart = useSelector(state => state.shoppingCart);
+    const dispatch = useDispatch();
 
     const [ addressModalOpen, setAddressModalOpen ] = React.useState(false);
     const [ paymentModalOpen, setPaymentModalOpen ] = React.useState(false);
 
-        //This may need to be on a checkout page.
-        //Check payment and address Information
-        //Create a log of the transaction
-        //Remove items from cart
-        //Redirect to home page.
-
     const checkout = async () => {
+        //Create a log of the transaction?
+
+        //Remove items from cart
+        dispatch({type: 'RESET_CART'})
+        //Redirect to home page.
         navigate('/home')
     }
 
@@ -57,6 +57,7 @@ const ItemDisplayList = () => {
                 onClose={() => setAddressModalOpen(false)}
                 onOpen={() => setAddressModalOpen(true)}
                 open={addressModalOpen}
+                dimmer='blurring'
             >
                 <Modal.Header>Confirm Personal Information</Modal.Header>
                 <Modal.Content>
@@ -71,6 +72,7 @@ const ItemDisplayList = () => {
                 <Modal
                     onClose={()=>setPaymentModalOpen(false)}
                     open={paymentModalOpen}
+                    dimmer='blurring'
                 >
                     <Modal.Content>
                         <PaymentForm />

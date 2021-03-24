@@ -100,6 +100,15 @@ function reducer(state = initialState, action) {
         userPayment: action.payload.updatedPayment,
       }
 
+    case 'RESET_CART':
+      return {
+        ...state,
+        shoppingCart: {
+          total: 0,
+          items: [],
+        }
+      }
+
     default:
       return state;
   }
