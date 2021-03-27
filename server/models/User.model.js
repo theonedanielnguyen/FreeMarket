@@ -47,13 +47,25 @@ const UserSchema = new mongoose.Schema({
     createdItems: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Item"
+            ref: "Item",
         }
     ],
     cart: {
         total: {type: Number, default: 0},
         items: [{type: [String]}],
     },
+    transactions_buyer: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Transaction',
+        }
+    ],
+    transactions_seller: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Transaction',
+        }
+    ]
 }, { timestamps : true});
 
 UserSchema.virtual('confirmPassword')
