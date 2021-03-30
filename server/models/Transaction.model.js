@@ -5,12 +5,10 @@ const Transaction = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    items: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Item'
-        }
-    ],
+    items: {
+        type: Map,
+        of: Array
+    },
 }, { timestamps : true });
 
 module.exports.Transaction = mongoose.model('Transaction', TransactionSchema);
