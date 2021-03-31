@@ -1,6 +1,7 @@
 const ItemController = require('../controllers/Item.controller');
 const PaymentController = require('../controllers/Payment.controller');
 const ShopController = require('../controllers/Shop.controller');
+const TransactionController = require('../controllers/Transaction.controller');
 const UserController = require('../controllers/User.controller');
 
 module.exports = function(app) {
@@ -20,6 +21,9 @@ module.exports = function(app) {
     app.post('/api/shop/new', ShopController.createShop);
     app.get('/api/shop/:id', ShopController.getOneShop);
     app.put('/api/shop/:id', ShopController.updateShop);
+
+    app.post('/api/transaction/new', TransactionController.createTransaction);
+    app.get('/api/transaction/:id', TransactionController.getOneTransaction);
 
     app.post('/api/users/new', UserController.createUser);
     app.get('/api/users/:id', UserController.getOneUser);
