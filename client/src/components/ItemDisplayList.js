@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Button, Container, Grid, Icon, Item, Modal } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductCardHorizontal from '../components/ProductCardHorizontal';
@@ -7,6 +8,7 @@ import PaymentForm from './PaymentForm';
 import { navigate } from '@reach/router';
 
 const ItemDisplayList = () => {
+    const user = useSelector(state => state.loggedInUser);
     const shoppingCart = useSelector(state => state.shoppingCart);
     const dispatch = useDispatch();
 
@@ -15,11 +17,25 @@ const ItemDisplayList = () => {
 
     const checkout = async () => {
         //Create a log of the transaction?
+        const itemMap = {};
+        for (let i = 0; i < shoppingCart.items.length; i++) {
+            const databaseAccess = await axios.get("http://localhost:8000/api/item/" + shoppingCart.items[i]);
+            const targetItem = databaseAccess.data[0];
+            itemMap[targetItem.creator_id]?
+                itemMap[targetItem.creator_id].push(targetItem._id)
+                : 
+                itemMap[targetItem.creator_id] = [targetItem._id];
+        }
+        const newTransaction = {buyer_id: user._id, items: itemMap, total: shoppingCart.total};
 
+        const transactionConfirmation = await axios.post('http://localhost:8000/api/transaction/new', newTransaction)
+
+        
+        console.log(newTransaction);
         //Remove items from cart
-        dispatch({type: 'RESET_CART'})
-        //Redirect to home page.
-        navigate('/home')
+        // dispatch({type: 'RESET_CART'})
+        // //Redirect to home page.
+        // navigate('/home')
     }
 
     return (

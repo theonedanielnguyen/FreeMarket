@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Transaction = new mongoose.Schema({
+const TransactionSchema = new mongoose.Schema({
     buyer_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -9,6 +9,9 @@ const Transaction = new mongoose.Schema({
         type: Map,
         of: Array
     },
+    total: {
+        type: Number,
+    }
 }, { timestamps : true });
 
 module.exports.Transaction = mongoose.model('Transaction', TransactionSchema);
