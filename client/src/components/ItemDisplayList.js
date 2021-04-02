@@ -18,19 +18,23 @@ const ItemDisplayList = () => {
     const checkout = async () => {
         //Create a log of the transaction?
         const itemMap = {};
+        const sellers = []
         for (let i = 0; i < shoppingCart.items.length; i++) {
             const databaseAccess = await axios.get("http://localhost:8000/api/item/" + shoppingCart.items[i]);
             const targetItem = databaseAccess.data[0];
-            itemMap[targetItem.creator_id]?
-                itemMap[targetItem.creator_id].push(targetItem._id)
-                : 
+            if (itemMap[targetItem.creator_id]) {
+                itemMap[targetItem.creator_id].push(targetItem._id);
+            }
+            else {
                 itemMap[targetItem.creator_id] = [targetItem._id];
+                sellers.push(targetItem.creator_id);
+            }
         }
         const newTransaction = {buyer_id: user._id, items: itemMap, total: shoppingCart.total};
 
         const transactionConfirmation = await axios.post('http://localhost:8000/api/transaction/new', newTransaction)
 
-        
+
         console.log(newTransaction);
         //Remove items from cart
         // dispatch({type: 'RESET_CART'})
