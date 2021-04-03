@@ -16,7 +16,6 @@ const ItemDisplayList = () => {
     const [ paymentModalOpen, setPaymentModalOpen ] = React.useState(false);
 
     const checkout = async () => {
-        //Create a log of the transaction?
         const itemMap = {};
         const sellers = []
         for (let i = 0; i < shoppingCart.items.length; i++) {
@@ -34,12 +33,14 @@ const ItemDisplayList = () => {
 
         const transactionConfirmation = await axios.post('http://localhost:8000/api/transaction/new', newTransaction)
 
+        //Insert for loop to iterate through the sellers and add to their sales list
+
 
         console.log(newTransaction);
-        //Remove items from cart
-        // dispatch({type: 'RESET_CART'})
-        // //Redirect to home page.
-        // navigate('/home')
+
+        dispatch({type: 'RESET_CART'})
+
+        navigate('/home')
     }
 
     return (
