@@ -36,7 +36,7 @@ const ItemDisplayList = () => {
         //Insert for loop to iterate through the sellers and add to their sales list
 
 
-        console.log(newTransaction);
+        console.log(transactionConfirmation);
 
         dispatch({type: 'RESET_CART'})
 
