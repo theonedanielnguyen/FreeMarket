@@ -32,15 +32,22 @@ const ItemDisplayList = () => {
         const newTransaction = {buyer_id: user._id, items: itemMap, total: shoppingCart.total};
 
         const transactionConfirmation = await axios.post('http://localhost:8000/api/transaction/new', newTransaction)
+        const transactionID = transactionConfirmation.data[0]._id;
 
         //Insert for loop to iterate through the sellers and add to their sales list
+        for(let i=0; i<sellers.length; i++) {
+            const APICall = await axios.get('http://localhost:8000/api/users/'+sellers[i]);
+            const seller = APICall.data[0]
+            console.log(seller)
+            const transactionlist = [...seller.transactions_seller]
+            transactionlist.push(transactionID);
+        }
 
+        // console.log(transactionConfirmation);
 
-        console.log(transactionConfirmation);
+        // dispatch({type: 'RESET_CART'})
 
-        dispatch({type: 'RESET_CART'})
-
-        navigate('/home')
+        // navigate('/home')
     }
 
     return (
