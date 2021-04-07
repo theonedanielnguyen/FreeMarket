@@ -32,22 +32,30 @@ const ItemDisplayList = () => {
         const newTransaction = {buyer_id: user._id, items: itemMap, total: shoppingCart.total};
 
         const transactionConfirmation = await axios.post('http://localhost:8000/api/transaction/new', newTransaction)
-        const transactionID = transactionConfirmation.data[0]._id;
+        const transactionID = transactionConfirmation.data._id;
 
         //Insert for loop to iterate through the sellers and add to their sales list
         for(let i=0; i<sellers.length; i++) {
-            const APICall = await axios.get('http://localhost:8000/api/users/'+sellers[i]);
-            const seller = APICall.data[0]
+            const APIGet = await axios.get('http://localhost:8000/api/users/'+sellers[i]);
+            const seller = APIGet.data[0]
             console.log(seller)
-            const transactionlist = [...seller.transactions_seller]
-            transactionlist.push(transactionID);
+            const transactionList = [...seller.transactions_seller]
+            transactionList.push(transactionID);
+            const updatedSeller = {...seller, transactions_seller:transactionList};
+            console.log(updatedSeller)
+            const APIPut = await axios.put('http://localhost:8000/api/users/'+sellers[i], updatedSeller);
+            const success = APIPut.data;
+            console.log(success);
         }
 
-        // console.log(transactionConfirmation);
+        const cartReset = {total:0, items:[]};
+        const userCartReset = {...user, cart:cartReset};
+        const APIPut = await axios.put('http://localhost:8000/api/users/'+user._id, userCartReset);
+        console.log(APIPut.data);
 
-        // dispatch({type: 'RESET_CART'})
+        dispatch({type: 'RESET_CART'})
 
-        // navigate('/home')
+        navigate('/home')
     }
 
     return (
