@@ -9,6 +9,7 @@ const PaymentForm = () => {
     const dispatch = useDispatch();
 
     const [ cardNumber, setCardNumber ] = useState(payment.cardNumber);
+    const [ nameOnCard, setNameOnCard ] = useState(payment.nameOnCard);
     const [ expirationDate, setExpirationDate ] = useState(moment(payment.expirationDate).format('yyyy-MM'));
     const [ securityCode, setSecurityCode ] = useState(payment.securityCode);
     const [ editable, setEditable ] = useState(false);
@@ -19,6 +20,7 @@ const PaymentForm = () => {
         const newPayment = {
             ...payment,
             cardNumber: cardNumber,
+            nameOnCard: nameOnCard,
             expirationDate: expirationDate,
             securityCode: securityCode,
         }
@@ -36,6 +38,7 @@ const PaymentForm = () => {
 
     const handleCancel = () => {
         setCardNumber(payment.cardNumber);
+        setNameOnCard(payment.nameOnCard);
         setExpirationDate(moment(payment.expirationDate).format('yyyy-MM'));
         setSecurityCode(payment.securityCode);
         setEditable(false);
@@ -56,6 +59,13 @@ const PaymentForm = () => {
                             value={cardNumber}
                             onChange={(e)=>setCardNumber(e.target.value)}
                             type='number'
+                        />
+                        <Form.Input fluid 
+                            name='nameOnCard'
+                            placeholder='Name on Card'
+                            value={nameOnCard}
+                            onChange={(e)=>setNameOnCard(e.target.value)}
+                            type='text'
                         />
                         <Form.Group widths='equal'>
                             <Form.Input fluid
@@ -98,6 +108,13 @@ const PaymentForm = () => {
                             value={cardNumber}
                             onChange={(e)=>setCardNumber(e.target.value)}
                             type='number'
+                        />
+                        <Form.Input fluid readOnly
+                            name='nameOnCard'
+                            placeholder='Name on Card'
+                            value={nameOnCard}
+                            onChange={(e)=>setNameOnCard(e.target.value)}
+                            type='text'
                         />
                         <Form.Group widths='equal'>
                             <Form.Input fluid readOnly

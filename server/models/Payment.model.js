@@ -8,6 +8,9 @@ const PaymentSchema = new mongoose.Schema({
     cardNumber: {
         type: Number,
     },
+    nameOnCard: {
+        type: String,
+    },
     expirationDate: {
         type: Date,
     },
