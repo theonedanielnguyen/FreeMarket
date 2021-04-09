@@ -13,6 +13,7 @@ import Search from './views/Search';
 import PersonalData from './views/PersonalData';
 import EditItem from './views/EditItem';
 import Shop from './views/Shop';
+import OrderConfirmation from './views/OrderConfirmation';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Search path='/search/:searchParameters' />
         <EditItem path='/products/:productID' />
         <Shop path='/shop/:shopID' />
+        <OrderConfirmation path='/confirmation/:orderID' />
       </Router>
     </div>
   );
