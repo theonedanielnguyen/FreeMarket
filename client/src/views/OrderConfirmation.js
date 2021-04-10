@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Container } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 import TopNavBar from '../components/TopNavBar';
 import TransactionDisplay from '../components/TransactionDisplay';
 
@@ -10,6 +10,7 @@ const OrderConfirmation = (props) => {
     return (
         <Container fluid>
             <TopNavBar />
+            <Header size="large">Order Successful</Header>
             <TransactionDisplay transactionID={orderID} />
         </Container>
     )
