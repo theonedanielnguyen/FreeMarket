@@ -46,8 +46,8 @@ const ProductCard = (props) => {
         else{
             const newTotal = shoppingCart.total + product.price;
             const newItems = [...shoppingCart.items, productID];
-            console.log(user._id)
-            console.log(productOwnerID)
+            // console.log(user._id)
+            // console.log(productOwnerID)
             dispatch({type: 'ADD_ITEM_TO_CART', payload: {newItems, newTotal}});
             navigate('/cart')
         }

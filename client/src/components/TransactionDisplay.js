@@ -9,8 +9,10 @@ const TransactionDisplay = (props) => {
     useEffect(() => {
         const loadTransaction = async () => {
             const APICall = await axios.get("http://localhost:8000/api/transaction/"+transactionID);
-            setTransaction(APICall.data);
+            setTransaction(APICall.data[0]);
+            console.log(APICall.data[0]);
         }
+        loadTransaction();
     }, [transactionID])
 
     return (

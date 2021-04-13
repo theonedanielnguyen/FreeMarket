@@ -34,15 +34,20 @@ const ItemDisplayList = () => {
         const transactionConfirmation = await axios.post('http://localhost:8000/api/transaction/new', newTransaction)
         const transactionID = transactionConfirmation.data._id;
 
+        const updateUserTransactions = [...user.transactions_buyer, transactionID];
+        const updatedUser = {...user, transactions_buyer:updateUserTransactions};
+        const userAPIPut = await axios.put('http://localhost:8000/api/users/'+user._id, updatedUser);
+        const userUpdate = userAPIPut.data;
+        console.log(userUpdate);
         //Insert for loop to iterate through the sellers and add to their sales list
         for(let i=0; i<sellers.length; i++) {
             const APIGet = await axios.get('http://localhost:8000/api/users/'+sellers[i]);
             const seller = APIGet.data[0]
-            console.log(seller)
+            // console.log(seller)
             const transactionList = [...seller.transactions_seller]
             transactionList.push(transactionID);
             const updatedSeller = {...seller, transactions_seller:transactionList};
-            console.log(updatedSeller)
+            // console.log(updatedSeller)
             const APIPut = await axios.put('http://localhost:8000/api/users/'+sellers[i], updatedSeller);
             const success = APIPut.data;
             console.log(success);
@@ -55,7 +60,7 @@ const ItemDisplayList = () => {
 
         dispatch({type: 'RESET_CART'})
 
-        navigate('/home')
+        navigate('/confirmation/'+transactionID);
     }
 
     return (
