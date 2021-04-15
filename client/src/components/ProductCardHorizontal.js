@@ -5,6 +5,7 @@ import { Button, Grid, Item } from 'semantic-ui-react';
 
 const ProductCardHorizontal = (props) => {
     const productID = props.productID;
+    const deleteable = props.deleteable;
     const shoppingCart = useSelector(state => state.shoppingCart);
     const dispatch = useDispatch();
     const [ product, setProduct ] = useState({})
@@ -38,11 +39,15 @@ const ProductCardHorizontal = (props) => {
                     </Grid>
                 </Item.Content>
                 <Item.Description style={{textAlign:'left'}}>{product.description}</Item.Description>
+                {deleteable?
                 <Item.Extra>
                     <Button floated='right' color='red' onClick={() =>removeItem()}>
                         Remove
                     </Button>
                 </Item.Extra>
+                :
+                <></>
+                }
             </Item.Content>
         </Item>
     )

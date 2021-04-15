@@ -70,7 +70,7 @@ const ItemDisplayList = () => {
                     <Item.Group divided style={{width:'60vw'}}>
                         {shoppingCart.items.map((item, index) => {
                             return (
-                                <ProductCardHorizontal productID={item} key={index} /> 
+                                <ProductCardHorizontal productID={item} key={index} deleteable={true}/> 
                             )
                         })}
                     </Item.Group>

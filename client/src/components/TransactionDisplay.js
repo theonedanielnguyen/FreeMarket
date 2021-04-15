@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import ProductCardHorizontal from './ProductCardHorizontal';
 
 const TransactionDisplay = (props) => {
@@ -17,18 +17,18 @@ const TransactionDisplay = (props) => {
     }, [transactionID])
 
     return (
-        <Container>
+        <Segment>
             {Object.keys(transaction.items).map((item, key) => {
                 return(
                     transaction.items[item].map((subItem, subKey) => {
                         return(
-                            <ProductCardHorizontal key={subKey} productID={subItem} />
+                            <ProductCardHorizontal key={subKey} productID={subItem} deleteable={false}/>
                         )
                     })
                 )
             })
             }
-        </Container>
+        </Segment>
     )
 }
 
