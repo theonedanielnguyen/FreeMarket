@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { navigate } from '@reach/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Grid, Item } from 'semantic-ui-react';
+import { Button, Grid, Item, Modal } from 'semantic-ui-react';
 
 const ProductCardHorizontal = (props) => {
     const productID = props.productID;
@@ -9,11 +10,18 @@ const ProductCardHorizontal = (props) => {
     const shoppingCart = useSelector(state => state.shoppingCart);
     const dispatch = useDispatch();
     const [ product, setProduct ] = useState({})
+    const [ reorderSuccessModal, setReorderSuccessModal ] = useState(false);
 
     const removeItem = () => {
         const newTotal = shoppingCart.total - product.price;
         const newItems = shoppingCart.items.filter(item => item !== productID);
         dispatch({ type: 'REMOVE_FROM_CART', payload: {newTotal, newItems}})
+    }
+
+    const reorderItem = () => {
+        const newTotal = shoppingCart.total + product.price;
+        const newItems = [...shoppingCart.items, productID];
+        dispatch({type: 'ADD_ITEM_TO_CART', payload: {newItems, newTotal}});
     }
 
     useEffect(() => {
@@ -25,6 +33,7 @@ const ProductCardHorizontal = (props) => {
     }, [productID]);
 
     return (
+        <>
         <Item>
             <Item.Image src={product.imageURL} style={{height:'100px'}} size='tiny' floated='left' />
             <Item.Content>
@@ -46,10 +55,30 @@ const ProductCardHorizontal = (props) => {
                     </Button>
                 </Item.Extra>
                 :
-                <></>
+                <Item.Extra>
+                    <Button floated='right' color='green' onClick={() =>reorderItem()}>
+                        Reorder Item
+                    </Button>
+                </Item.Extra>
                 }
             </Item.Content>
         </Item>
+        <Modal
+            onClose={() => setReorderSuccessModal(false)}
+            onOpen={() => setReorderSuccessModal(true)}
+            open={reorderSuccessModal}
+            dimmer='blurring'
+        >
+            <Modal.Header>Successfully Added To Cart</Modal.Header>
+            <Modal.Content>
+                The item has been readded to your cart.
+            </Modal.Content>
+            <Modal.Actions>
+                <Button onClick={()=>setReorderSuccessModal(false)}>OK</Button>
+                <Button onClick={()=>navigate('/cart')}>To Cart</Button>
+            </Modal.Actions>
+        </Modal>
+        </>
     )
 }
 
