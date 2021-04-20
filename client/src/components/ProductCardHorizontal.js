@@ -55,11 +55,11 @@ const ProductCardHorizontal = (props) => {
                     </Button>
                 </Item.Extra>
                 :
-                <Item.Extra>
+                // <Item.Extra>
                     <Button floated='right' color='green' onClick={() =>reorderItem()}>
                         Reorder Item
                     </Button>
-                </Item.Extra>
+                // </Item.Extra>
                 }
             </Item.Content>
         </Item>
