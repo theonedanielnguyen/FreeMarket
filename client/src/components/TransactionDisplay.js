@@ -34,6 +34,17 @@ const TransactionDisplay = (props) => {
                                 })}
                             </Item.Group>
                         </Grid.Row>
+                        <Grid.Row style={{textAlign:'right'}}>
+                                <Grid.Column>
+                                    <Item style={{marginRight: '20vw'}}>
+                                    <Item.Content>
+                                        <Item.Description style={{textAlign:'right'}}>
+                                            <h3><strong>Total:</strong> $ {transaction.total}</h3>
+                                        </Item.Description>
+                                    </Item.Content>
+                                    </Item>
+                                </Grid.Column>
+                        </Grid.Row>
                     </Grid>
                 </Container>
             )
