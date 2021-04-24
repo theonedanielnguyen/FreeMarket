@@ -14,6 +14,7 @@ import PersonalData from './views/PersonalData';
 import EditItem from './views/EditItem';
 import Shop from './views/Shop';
 import OrderConfirmation from './views/OrderConfirmation';
+import PastPurchases from './views/PastPurchases';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <EditItem path='/products/:productID' />
         <Shop path='/shop/:shopID' />
         <OrderConfirmation path='/confirmation/:orderID' />
+        <PastPurchases path='/pastPurchases' />
       </Router>
     </div>
   );
