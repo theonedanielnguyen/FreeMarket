@@ -34,7 +34,9 @@ const ItemDisplayList = () => {
         const transactionConfirmation = await axios.post('http://localhost:8000/api/transaction/new', newTransaction)
         const transactionID = transactionConfirmation.data._id;
 
-        const updateUserTransactions = [...user.transactions_buyer, transactionID];
+        const tempTransactions = user.transactions_buyer
+        const updateUserTransactions = tempTransactions.push(transactionID);
+        console.log(updateUserTransactions);
         const updatedUser = {...user, transactions_buyer:updateUserTransactions};
         const userAPIPut = await axios.put('http://localhost:8000/api/users/'+user._id, updatedUser);
         const userUpdate = userAPIPut.data;

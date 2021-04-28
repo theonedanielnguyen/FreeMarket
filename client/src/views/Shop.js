@@ -18,6 +18,7 @@ const Shop = (props) => {
                 const shop = targetShop.data[0];
                 const newItems = shop.itemsSold;
                 const shopOwner = await axios.get('http://localhost:8000/api/users/'+ shop.owner_id);
+                console.log(shop)
                 const ownerData = shopOwner.data[0];
                 setShop(shop);
                 setShopOwner(`${ownerData.firstName} ${ownerData.lastName}`)
