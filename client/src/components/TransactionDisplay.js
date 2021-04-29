@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import { Container, Grid, Item, Segment } from 'semantic-ui-react';
 import ProductCardHorizontal from './ProductCardHorizontal';
 
@@ -25,6 +26,15 @@ const TransactionDisplay = (props) => {
             return(
                 <Container>
                     <Grid centered>
+                        <Grid.Row>
+                            <Item>
+                                <Item.Content>
+                                    <Item.Description style={{textAlign:'right'}}>
+                                        <h3><strong>Ordered On:</strong> {moment(transaction.updatedAt).format('MM/DD/yyyy')}</h3>
+                                    </Item.Description>
+                                </Item.Content>
+                            </Item>
+                        </Grid.Row>
                         <Grid.Row>
                             <Item.Group divided style={{width:'60vw'}}>
                                 {transaction.items[item].map((subItem, subKey) => {
