@@ -6,14 +6,11 @@ import TransactionDisplay from './TransactionDisplay';
 const PastPurchasesDisplay = () => {
     const user = useSelector(state => state.loggedInUser);
 
-    useEffect(() => {
-        console.log(user)
-    })
     return(
         <Container fluid>
             {user.transactions_buyer.map((transaction, key) => {
                 return(
-                    <TransactionDisplay transactionID={transaction} key={key} />
+                    <TransactionDisplay transactionID={transaction} key={key} purchases={true} />
                 )
             })}
         </Container>

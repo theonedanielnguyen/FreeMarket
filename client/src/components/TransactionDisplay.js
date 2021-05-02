@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Container, Grid, Item, Segment } from 'semantic-ui-react';
 import ProductCardHorizontal from './ProductCardHorizontal';
+import { useSelector } from 'react-redux';
 
 const TransactionDisplay = (props) => {
+    const user = useSelector(state => state.loggedInUser);
     const transactionID = props.transactionID;
+    const purchases = props.purchases;
     const [ transaction, setTransaction ] = useState({});
     const [ loaded, setLoaded ] = useState(false);
 
