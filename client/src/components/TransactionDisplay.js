@@ -29,35 +29,73 @@ const TransactionDisplay = (props) => {
             return(
                 <Container>
                     <Grid centered>
-                        <Grid.Row>
-                            <Item>
-                                <Item.Content>
-                                    <Item.Description style={{textAlign:'right'}}>
-                                        <h3><strong>Ordered On:</strong> {moment(transaction.updatedAt).format('MM/DD/yyyy')}</h3>
-                                    </Item.Description>
-                                </Item.Content>
-                            </Item>
-                        </Grid.Row>
-                        <Grid.Row>
-                            <Item.Group divided style={{width:'60vw'}}>
-                                {transaction.items[item].map((subItem, subKey) => {
-                                    return(
-                                        <ProductCardHorizontal key={subKey} productID={subItem} deleteable={false}/>
-                                    )
-                                })}
-                            </Item.Group>
-                        </Grid.Row>
-                        <Grid.Row style={{textAlign:'right'}}>
-                                <Grid.Column>
-                                    <Item style={{marginRight: '20vw'}}>
+                        {purchases?
+                            <>
+                            {/* This is for PURCHASES */}
+                            <Grid.Row>
+                                <Item>
                                     <Item.Content>
                                         <Item.Description style={{textAlign:'right'}}>
-                                            <h3><strong>Total:</strong> $ {transaction.total}</h3>
+                                            <h3><strong>Ordered On:</strong> {moment(transaction.updatedAt).format('MM/ DD/yyyy')}</h3>
                                         </Item.Description>
                                     </Item.Content>
-                                    </Item>
-                                </Grid.Column>
-                        </Grid.Row>
+                                </Item>
+                            </Grid.Row>
+                            <Grid.Row>
+                                <Item.Group divided style={{width:'60vw'}}>
+                                    {transaction.items[item].map((subItem, subKey) => {
+                                        return(
+                                            <ProductCardHorizontal key={subKey} productID={subItem} deleteable={false}/>
+                                        )
+                                    })}
+                                </Item.Group>
+                            </Grid.Row>
+                            <Grid.Row style={{textAlign:'right'}}>
+                                    <Grid.Column>
+                                        <Item style={{marginRight: '20vw'}}>
+                                        <Item.Content>
+                                            <Item.Description style={{textAlign:'right'}}>
+                                                <h3><strong>Total:</strong> $ {transaction.total}</h3>
+                                            </Item.Description>
+                                        </Item.Content>
+                                        </Item>
+                                    </Grid.Column>
+                            </Grid.Row>
+                            </>
+                            :
+                            <>
+                            {/* This is for SALES */}
+                            <Grid.Row>
+                                <Item>
+                                    <Item.Content>
+                                        <Item.Description style={{textAlign:'right'}}>
+                                            <h3><strong>Ordered On:</strong> {moment(transaction.updatedAt).format('MM/ DD/yyyy')}</h3>
+                                        </Item.Description>
+                                    </Item.Content>
+                                </Item>
+                            </Grid.Row>
+                            <Grid.Row>
+                                <Item.Group divided style={{width:'60vw'}}>
+                                    {transaction.items[item].map((subItem, subKey) => {
+                                        return(
+                                            <ProductCardHorizontal key={subKey} productID={subItem} deleteable={false}/>
+                                        )
+                                    })}
+                                </Item.Group>
+                            </Grid.Row>
+                            <Grid.Row style={{textAlign:'right'}}>
+                                    <Grid.Column>
+                                        <Item style={{marginRight: '20vw'}}>
+                                        <Item.Content>
+                                            <Item.Description style={{textAlign:'right'}}>
+                                                <h3><strong>Total:</strong> $ {transaction.total}</h3>
+                                            </Item.Description>
+                                        </Item.Content>
+                                        </Item>
+                                    </Grid.Column>
+                            </Grid.Row>
+                            </>
+                        }
                     </Grid>
                 </Container>
             )
