@@ -9,14 +9,24 @@ const TransactionDisplay = (props) => {
     const user = useSelector(state => state.loggedInUser);
     const transactionID = props.transactionID;
     const purchases = props.purchases;
+    // True / False statement about whether the transaction data is being accessed for buying or purchasing review
     const [ transaction, setTransaction ] = useState({});
+    const [ userItems, setUserItems ] = useState([]);
     const [ loaded, setLoaded ] = useState(false);
 
     useEffect(() => {
         const loadTransaction = async () => {
             const APICall = await axios.get("http://localhost:8000/api/transaction/"+transactionID);
-            setTransaction(APICall.data[0]);
+            const tempTransaction = APICall.data[0];
+            setTransaction(tempTransaction);
             // console.log(APICall.data[0]);
+            if (!purchases) {
+                // Parse item data for items
+                for (const userID in tempTransaction.items) {
+
+                }
+                // Return only items of owner
+            }
             setLoaded(true);
         }
         loadTransaction();
@@ -69,7 +79,7 @@ const TransactionDisplay = (props) => {
                                 <Item>
                                     <Item.Content>
                                         <Item.Description style={{textAlign:'right'}}>
-                                            <h3><strong>Ordered On:</strong> {moment(transaction.updatedAt).format('MM/ DD/yyyy')}</h3>
+                                            <h3><strong>Sold On:</strong> {moment(transaction.updatedAt).format('MM/ DD/yyyy')}</h3>
                                         </Item.Description>
                                     </Item.Content>
                                 </Item>
@@ -82,17 +92,6 @@ const TransactionDisplay = (props) => {
                                         )
                                     })}
                                 </Item.Group>
-                            </Grid.Row>
-                            <Grid.Row style={{textAlign:'right'}}>
-                                    <Grid.Column>
-                                        <Item style={{marginRight: '20vw'}}>
-                                        <Item.Content>
-                                            <Item.Description style={{textAlign:'right'}}>
-                                                <h3><strong>Total:</strong> $ {transaction.total}</h3>
-                                            </Item.Description>
-                                        </Item.Content>
-                                        </Item>
-                                    </Grid.Column>
                             </Grid.Row>
                             </>
                         }
