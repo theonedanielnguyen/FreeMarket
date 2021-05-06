@@ -45,7 +45,7 @@ const TransactionDisplay = (props) => {
                             <Item>
                                 <Item.Content>
                                     <Item.Description style={{textAlign:'right'}}>
-                                        <h3><strong>Ordered On:</strong> {moment(transaction.updatedAt).format('MM/ DD/yyyy')}</h3>
+                                        <h3><strong>Ordered On:</strong> {moment(transaction.updatedAt).format('MM/DD/yyyy')}</h3>
                                     </Item.Description>
                                 </Item.Content>
                             </Item>
@@ -81,7 +81,7 @@ const TransactionDisplay = (props) => {
                         <Item>
                             <Item.Content>
                                 <Item.Description style={{textAlign:'right'}}>
-                                    <h3><strong>Sold On:</strong> {moment(transaction.updatedAt).format('MM/ DD/yyyy')}</h3>
+                                    <h3><strong>Sold On:</strong> {moment(transaction.updatedAt).format('MM/DD/yyyy')}</h3>
                                 </Item.Description>
                             </Item.Content>
                         </Item>
